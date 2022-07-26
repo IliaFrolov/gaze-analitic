@@ -1,17 +1,33 @@
 import React, { useState } from "react";
-import { FirebaseDatabaseProvider, FirebaseDatabaseNode } from "@react-firebase/database";
-import firebase from "firebase/app";
-import "firebase/database";
-import config from "./firebase-config";
+import { FirebaseDatabaseNode } from "@react-firebase/database";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import LoginPage from './pages/login';
+import ResultsPage from './pages/results';
+import TryAgainPage from './pages/try-again';
+import TestPage from "./pages/test";
 
-function App() {
+
+const App = () => {
   const s = (a) => JSON.stringify(a, null, 2);
   const [limit, setLimit] = useState(2);
 
   return (
     <div className="App">
-      <FirebaseDatabaseProvider firebase={firebase} {...config}>
-        <FirebaseDatabaseNode
+      <BrowserRouter>
+        <ul>
+          <li><Link to="/">Test</Link></li>
+          <li><Link to="/results">Results</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/tryagain">tryagain</Link></li>
+        </ul>
+        <Routes>
+          <Route path="/" element={<TestPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="results" element={<ResultsPage />} />
+          <Route path="tryagain" element={<TryAgainPage />} />
+        </Routes>
+      </BrowserRouter>
+      {/* <FirebaseDatabaseNode
           path="users/"
           limitToFirst={limit}
         >
@@ -32,8 +48,7 @@ function App() {
               </>
             );
           }}
-        </FirebaseDatabaseNode>
-      </FirebaseDatabaseProvider>
+        </FirebaseDatabaseNode> */}
     </div>
   );
 }

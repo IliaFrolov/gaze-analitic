@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import firebase from "firebase/app";
+import "firebase/database";
+import config from "./firebase-config";
+import { FirebaseDatabaseProvider } from '@react-firebase/database';
 import App from './App';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <FirebaseDatabaseProvider firebase={firebase} {...config}>
+      <App />
+    </FirebaseDatabaseProvider>
   </React.StrictMode>
 );
 
