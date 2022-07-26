@@ -1,56 +1,45 @@
-import React, { useState } from "react";
-import { FirebaseDatabaseNode } from "@react-firebase/database";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import LoginPage from './pages/login';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
+import SignInPage from './pages/signIn';
 import ResultsPage from './pages/results';
-import TryAgainPage from './pages/try-again';
+import TryAgainPage from './pages/tryAgain';
 import TestPage from "./pages/test";
+import { PATH_HOME, PATH_RESULTS_PAGE, PATH_SING_IN_PAGE, PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME, SAVED_USER_RESULT } from "./constants";
+
 
 
 const App = () => {
-  const s = (a) => JSON.stringify(a, null, 2);
-  const [limit, setLimit] = useState(2);
 
   return (
     <div className="App">
       <BrowserRouter>
         <ul>
-          <li><Link to="/">Test</Link></li>
-          <li><Link to="/results">Results</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/tryagain">tryagain</Link></li>
+          <li><Link to={PATH_HOME}>Test</Link></li>
+          <li><Link to={PATH_SING_IN_PAGE}>Login</Link></li>
+          <li><Link to={PATH_RESULTS_PAGE}>Results</Link></li>
+          <li><Link to={PATH_TRY_AGAIN_PAGE}>tryagain</Link></li>
         </ul>
         <Routes>
-          <Route path="/" element={<TestPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="results" element={<ResultsPage />} />
-          <Route path="tryagain" element={<TryAgainPage />} />
+          <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />
+          <Route path={PATH_HOME} element={<RequireAuth><TestPage /></RequireAuth>} />
+          <Route path={PATH_RESULTS_PAGE} element={<RequireAuth><ResultsPage /></RequireAuth>} />
+          <Route path={PATH_TRY_AGAIN_PAGE} element={<RequireAuth><TryAgainPage /></RequireAuth>} />
         </Routes>
       </BrowserRouter>
-      {/* <FirebaseDatabaseNode
-          path="users/"
-          limitToFirst={limit}
-        >
-          {d => {
-            return (
-              <>
-                <pre>Path {d.path}</pre>
-                <pre style={{ height: 300, overflow: "auto" }}>
-                  Value {s(d.value)}
-                </pre>
-                <button
-                  onClick={() => {
-                    setLimit(limit + 2);
-                  }}
-                >
-                  Load more
-                </button>
-              </>
-            );
-          }}
-        </FirebaseDatabaseNode> */}
     </div>
   );
+}
+
+function RequireAuth({ children }) {
+  const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
+  const savedKey = JSON.parse(localStorage.getItem(SAVED_USER_KEY));
+  let location = useLocation();
+
+  if (!savedName || !savedKey) {
+    return <Navigate to={PATH_SING_IN_PAGE} state={{ from: location }} replace />;
+  }
+
+  return children;
 }
 
 export default App;
