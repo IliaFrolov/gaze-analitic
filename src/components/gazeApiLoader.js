@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Script from 'react-load-script'
+import Script from 'react-load-script';
+import * as heatmap from "heatmap.js";
 // FrameNr: 2253
 // GazeX: 1131.8
 // GazeY: 367.8
@@ -43,7 +44,7 @@ export const GazeCloudAPILoader = ({ callback }) => {
 
     const handleScriptLoad = () => {
         function processGaze(GazeData) {
-            console.log(GazeData);
+            // console.log(GazeData);
             let x_ = GazeData.docX;
             let y_ = GazeData.docY;
             document.getElementById("gazeX").innerHTML = x_;//GazeData.GazeX;
@@ -70,8 +71,6 @@ export const GazeCloudAPILoader = ({ callback }) => {
                 if (gaze.style.display === 'none')
                     gaze.style.display = 'block';
             }
-
-
         }
 
         window.GazeCloudAPI.OnCalibrationComplete = function () {
@@ -93,7 +92,7 @@ export const GazeCloudAPILoader = ({ callback }) => {
         window.GazeCloudAPI.StopEyeTracking();
         callback(result);
     }
-    console.log(result);
+    // console.log(result);
 
     return (
         <>

@@ -1,0 +1,13 @@
+.flexFullScreenCenterCenter {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexCenterAuto {
+    gap: 1em;
+    display: flex;
+    align-items: center;
+}

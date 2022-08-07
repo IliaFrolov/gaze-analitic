@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME } from "../constants";
 import { createUser } from "../firebase/api";
+import s from './pages.module.css';
 
 const SignInPage = () => {
     const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
@@ -49,31 +50,34 @@ const SignInPage = () => {
 
 
     return (
-        <form>
-            <div>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => {
-                        setName(e.target.value);
-                        handleValidation();
-                    }}
-                    placeholder="Full name"
-                    aria-label="fullname"
-                />
-            </div>
+        <div className={s.flexFullScreenCenterCenter}>
+            <form className={s.flexCenterAuto}>
+                <div>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => {
+                            setName(e.target.value);
+                            handleValidation();
+                        }}
+                        onBlur={handleValidation}
+                        placeholder="Full name"
+                        aria-label="fullname"
+                    />
+                </div>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
-                <button
-                    disabled={!isValid}
-                    onClick={onSubmit}
-                >
-                    Start
-                </button>
-            </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <div>
+                    <button
+                        disabled={!isValid}
+                        onClick={onSubmit}
+                    >
+                        Start
+                    </button>
+                </div>
 
-        </form>
+            </form>
+        </div>
 
 
 

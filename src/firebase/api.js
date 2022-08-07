@@ -20,7 +20,6 @@ const updateUserData = async (id, data, callback) => {
         const valueToSubmit = {
             [`${FIREBASE_USERS_PATH}/${id}/results`]: data,
             [`${FIREBASE_RESULTS_PATH}/${newResultKey}`]: data
-
         }
         await update(ref(db), valueToSubmit).then(callback());
     }

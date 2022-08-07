@@ -13,11 +13,13 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <ul>
-          <li><Link to={PATH_HOME}>Test</Link></li>
-          <li><Link to={PATH_SING_IN_PAGE}>Login</Link></li>
-          <li><Link to={PATH_RESULTS_PAGE}>Results</Link></li>
-          <li><Link to={PATH_TRY_AGAIN_PAGE}>tryagain</Link></li>
+        <ul style={{
+          margin: '10px', display: 'flex', gap: '10px', zIndex: '999', position: 'absolute', bottom: '0', right: '0'
+        }}>
+          <Link to={PATH_HOME}>Test</Link>
+          <Link to={PATH_RESULTS_PAGE}>Results</Link>
+          <Link to={PATH_TRY_AGAIN_PAGE}>Tryagain</Link>
+          <Link to={PATH_SING_IN_PAGE}>Login</Link>
         </ul>
         <Routes>
           <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />
@@ -26,7 +28,7 @@ const App = () => {
           <Route path={PATH_TRY_AGAIN_PAGE} element={<RequireAuth><TryAgainPage /></RequireAuth>} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 
