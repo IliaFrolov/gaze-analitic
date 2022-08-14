@@ -21,7 +21,7 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
 
     const handleScriptLoad = () => {
         setLoading(false);
-
+        window.webgazer.setRegression("ridge");
         window.webgazer.setGazeListener(function (data, elapsedTime) {
             if (data == null) {
                 return;

@@ -1,0 +1,61 @@
+.calibrationWrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.calibrationBtn {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background-color: red;
+    opacity: 0.2;
+    border-color: black;
+    border-style: solid;
+    position: fixed;
+}
+
+.passed {
+    background-color: yellow;
+}
+
+.btn-id1 {
+    top: 70px;
+    left: 340px;
+}
+.btn-id2 {
+    top: 70px;
+    left: 50vw;
+    margin-left: 340;
+}
+.btn-id3 {
+    top: 70px;
+    right: 2vw;
+}
+.btn-id4 {
+    top: 50vh;
+    left: 2vw;
+}
+.btn-id5 {
+    top: 50vh;
+    left: 50vw;
+}
+.btn-id6 {
+    top: 50vh;
+    right: 2vw;
+}
+.btn-id7 {
+    bottom: 2vw;
+    left: 2vw;
+}
+.btn-id8 {
+    bottom: 2vw;
+    left: 50vw;
+}
+.btn-id9 {
+    bottom: 2vw;
+    right: 2vw;
+}
