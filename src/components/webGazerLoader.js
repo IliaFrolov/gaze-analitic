@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Script from 'react-load-script';
+import Calibration from "./gazeCalibration/gazeCalibration";
 import { Spinner } from "./spinner/spinner";
 
 export const WebGazerLoader = ({ online, processResult, callback }) => {
@@ -11,13 +12,19 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
     // console.log({ x: x, y: y });
 
     useEffect(() => {
-        if (x !== -1 && y !== x) {
+        if (x !== -1 && y !== x && calibrated) {
 
             setResult((prev) => [...prev, { x, y }])
             // console.log({ x, y });
             online(result);
         }
     }, [x, y])
+
+    // useEffect(() => {
+    //     if (!isLoading) {
+    //         return (window.webgazer.clearData());
+    //     }
+    // })
 
     const handleScriptLoad = () => {
         setLoading(false);
@@ -28,7 +35,6 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
             }
             setX(data.x); //these x coordinates are relative to the viewport
             setY(data.y); //these y coordinates are relative to the viewport
-            //console.log(elapsedTime); //elapsed time is based on time since begin was called
         }).begin();
     }
 
@@ -56,12 +62,16 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
                 onError={handleScriptError}
             />
             {!isLoading &&
-                <div style={{ float: 'right' }}>
-                    <button onClick={onPause}> Pause</button>
-                    <button onClick={window.webgazer.resume}> Resume</button>
-                    <button onClick={onFinish}> Finish</button>
-                </div>
+
+                (!calibrated ? <Calibration onSuccess={setCalibrated} /> :
+                    <div style={{ float: 'right' }}>
+                        <button onClick={onPause}> Pause</button>
+                        <button onClick={window.webgazer.resume}> Resume</button>
+                        <button onClick={onFinish}> Finish</button>
+                    </div>
+                )
             }
+            <canvas id="plotting_canvas" width="500" height="500" style={{ cursor: 'crosshair' }}></canvas>
         </>
 
     );

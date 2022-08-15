@@ -4,6 +4,7 @@ import HeatmapViewer from "../components/heatmapViewer";
 import { WebGazerLoader } from "../components/webGazerLoader";
 import { PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_RESULT } from "../constants";
 import { updateUserData } from "../firebase/api";
+// require('./../utils/resizeUtils');
 
 const TestPage = () => {
     const savedKey = JSON.parse(localStorage.getItem(SAVED_USER_KEY));

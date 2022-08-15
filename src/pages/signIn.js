@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME } from "../constants";
+import { PATH_HOME, PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME } from "../constants";
 import { createUser } from "../firebase/api";
 import s from './pages.module.css';
 
@@ -43,7 +43,7 @@ const SignInPage = () => {
 
             createUser(name, (key) => {
                 localStorage.setItem(SAVED_USER_KEY, JSON.stringify(key));
-                navigate("../");
+                navigate(PATH_HOME);
             });
         };
     };
