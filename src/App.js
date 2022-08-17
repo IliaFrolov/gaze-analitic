@@ -15,7 +15,7 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <ul style={{
-          margin: '10px', display: 'flex', gap: '10px', zIndex: '999', position: 'absolute', bottom: '0', right: '0'
+          margin: '10px', display: 'flex', gap: '10px', zIndex: '2', position: 'absolute', bottom: '0', right: '0'
         }}>
           <Link to={PATH_CALIBRATION_PAGE}>Clibration</Link>
           <Link to={PATH_HOME}>Test</Link>

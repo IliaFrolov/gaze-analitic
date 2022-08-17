@@ -25,11 +25,12 @@ const TestPage = () => {
         localStorage.setItem(SAVED_USER_RESULT, JSON.stringify(result));
         await updateUserData(savedKey, result, navigateForward)
     }
+
     return (
-        <>
-            <WebGazerLoader online={setResult} processResult={processResult} />
-            <HeatmapViewer result={result} />
-        </>
+        <WebGazerLoader online={setResult} processResult={processResult}>
+            {/* <HeatmapViewer result={result} /> */}
+            <p>calibrated sucessfuly</p>
+        </WebGazerLoader>
     )
 }
 

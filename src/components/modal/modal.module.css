@@ -1,0 +1,33 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.5);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+}
+
+.modal {
+    width: 70vw;
+    height: 50vh;
+    background: rgb(255, 255, 255);
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px;
+}
+
+.modal h1 {
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.modal button {
+    margin-top: 100px;
+}

@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from "react";
 import Script from 'react-load-script';
-import Calibration from "./gazeCalibration/gazeCalibration";
-import { Spinner } from "./spinner/spinner";
+import Calibration from "./gazeCalibration";
+import Spinner from "./spinner";
 
-export const WebGazerLoader = ({ online, processResult, callback }) => {
+export const WebGazerLoader = ({ online, processResult, children }) => {
     const [isLoading, setLoading] = useState(true)
     const [x, setX] = useState(-1);
     const [y, setY] = useState(-1);
+    const [sessionResult, setSessionResult] = useState([]);
     const [result, setResult] = useState([]);
     const [calibrated, setCalibrated] = useState(false);
-    // console.log({ x: x, y: y });
+    const [webgazerInstance, setWebgazerInstance] = useState(null);
 
     useEffect(() => {
         if (x !== -1 && y !== x && calibrated) {
-
-            setResult((prev) => [...prev, { x, y }])
-            // console.log({ x, y });
+            setSessionResult((prev) => [...prev, { x, y }])
             online(result);
+            console.log({ sessionResult });
         }
     }, [x, y])
 
-    // useEffect(() => {
-    //     if (!isLoading) {
-    //         return (window.webgazer.clearData());
-    //     }
-    // })
+    useEffect(() => {
+        console.log({ result });
+    }, [result])
 
     const handleScriptLoad = () => {
         setLoading(false);
         window.webgazer.setRegression("ridge");
-        window.webgazer.setGazeListener(function (data, elapsedTime) {
+        setWebgazerInstance(window.webgazer.setGazeListener(function (data, elapsedTime) {
             if (data == null) {
                 return;
             }
-            setX(data.x); //these x coordinates are relative to the viewport
-            setY(data.y); //these y coordinates are relative to the viewport
-        }).begin();
+            setX(data.x);
+            setY(data.y);
+        }))
     }
 
     const handleScriptError = () => {
@@ -43,14 +41,35 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
         console.log('Script loading Error!');
     }
 
-    const onPause = () => {
-        window.webgazer.pause();
+    const start = () => {
+        if (!isLoading) {
+            setSessionResult([]);
+            webgazerInstance.begin();
+        }
     }
-    const onFinish = () => {
+
+    const pause = async () => {
         window.webgazer.pause();
-        // window.webgazer.getCurrentPrediction();
-        processResult(window.webgazer.getCurrentPrediction());
+        setResult(sessionResult);
     }
+
+    const resume = () => {
+        setSessionResult([]);
+        window.webgazer.resume();
+    }
+
+    const finish = async () => {
+        window.webgazer.pause();
+        setResult(sessionResult);
+    }
+
+    const childrenWithProps = React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+            return React.cloneElement(child, { start, pause, resume, finish });
+        }
+        console.log('!isValidElement');
+        return child;
+    });
 
     return (
         <>
@@ -62,16 +81,15 @@ export const WebGazerLoader = ({ online, processResult, callback }) => {
                 onError={handleScriptError}
             />
             {!isLoading &&
+                <div style={{ float: 'right' }}>
+                    <button onClick={pause}> Pause</button>
+                    <button onClick={resume}> Resume</button>
+                    <button onClick={finish}> Finish</button>
+                </div>}
 
-                (!calibrated ? <Calibration onSuccess={setCalibrated} /> :
-                    <div style={{ float: 'right' }}>
-                        <button onClick={onPause}> Pause</button>
-                        <button onClick={window.webgazer.resume}> Resume</button>
-                        <button onClick={onFinish}> Finish</button>
-                    </div>
-                )
+            {!isLoading && (!calibrated ? <Calibration start={start} pause={pause} resume={resume} finish={finish} onSuccess={setCalibrated} /> : childrenWithProps)
             }
-            <canvas id="plotting_canvas" width="500" height="500" style={{ cursor: 'crosshair' }}></canvas>
+            <canvas id="plotting_canvas" width="500" height="500" style={{ display: 'none', cursor: 'crosshair' }}></canvas>
         </>
 
     );

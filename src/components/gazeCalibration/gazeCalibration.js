@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import s from "./gazeCalibration.module.css"
 import { calculatePrecision } from "../../utils/precisionUtils";
-import { PATH_HOME } from "../../constants";
+import Modal from "../modal/modal";
+import useModal from "../../hooks/useModal";
 
-const Calibration = ({ onSuccess }) => {
+const Calibration = ({ onSuccess, pause, resume, result, start, finish }) => {
     const defaultCalibrationButtons = {
         id1: { pressedTimes: 0, passed: false },
         id2: { pressedTimes: 0, passed: false },
@@ -22,6 +22,10 @@ const Calibration = ({ onSuccess }) => {
     const [pointCalibrate, setPointCalibrate] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const idReadyToMeasure = step === '2';
+
+    const { isShowing: isShowing1, toggle: toggle1 } = useModal(true);
+    const { isShowing: isShowing2, toggle: toggle2 } = useModal(true);
+
     const store_points_variable = () => {
         window.webgazer.params.storingPoints = true;
     }
@@ -42,6 +46,10 @@ const Calibration = ({ onSuccess }) => {
         { ...prev, [id]: { ...prev[id], passed: true } }
     )
 
+    // useEffect(() => {
+    //     start();
+    // }, [])
+
     useEffect(() => {
         for (const btnInx in calibrationPoints) {
             const btn = calibrationPoints[btnInx]
@@ -55,19 +63,25 @@ const Calibration = ({ onSuccess }) => {
 
     useEffect(() => {
         if (idReadyToMeasure) {
-            store_points_variable();
-            sleep(5000).then(() => {
-                stop_storing_points_variable(); // stop storing the prediction points
-                const past50 = window.webgazer.getStoredPoints(); // retrieve the stored points
-                const precision_measurement = calculatePrecision(past50);
-                console.log({ precision_measurement });
-                setAccuracy(precision_measurement);
-
-                setStep('3')
-
-            });
+            pause();
         }
     }, [step, idReadyToMeasure]);
+
+    const precisionMeasurement = () => {
+        resume();
+        store_points_variable();
+        sleep(5000).then(() => {
+            stop_storing_points_variable(); // stop storing the prediction points
+            const past50 = window.webgazer.getStoredPoints(); // retrieve the stored points
+            const precision_measurement = calculatePrecision(past50);
+            console.log({ precision_measurement });
+            pause();
+            setAccuracy(precision_measurement);
+
+            setStep('3');
+
+        });
+    }
 
     const onCalibrationButtonClick = (e) => {
         const id = e.target.id;
@@ -75,9 +89,12 @@ const Calibration = ({ onSuccess }) => {
     }
 
     const recalibrate = () => {
+        setCalibrationPoints(defaultCalibrationButtons);
+        setPointCalibrate(0);
         window.webgazer.clearData();
         setAccuracy(0);
         setStep('1');
+        resume();
     }
     const renderButtons = () => {
         return Object.keys(calibrationPoints).map((btnInx) => {
@@ -99,24 +116,36 @@ const Calibration = ({ onSuccess }) => {
     const firstStep = () => (
         <div className={s.calibrationWrapper}>
             {renderButtons()}
-
+            <Modal
+                header='Calibration'
+                bodyText="blabbla blaala"
+                isShowing={isShowing1}
+                hide={toggle1}
+                action={start}
+            />
         </div>
     )
 
     const secondStep = () => (
         <div className={s.calibrationWrapper}>
+            <Modal
+                header='Precision measurement'
+                bodyText="blabbla blaala"
+                isShowing={isShowing2}
+                hide={toggle2}
+                action={precisionMeasurement}
+            />
             <button
                 id='id5'
                 className={cn(s.calibrationBtn, s[`btn-id5`])}
             ></button>
-            <h3 style={{ marginBottom: '100px' }}>Explanation</h3>
         </div>
     )
 
     const thirdStep = () => (
         <div className={s.calibrationWrapper}>
             <h3 style={{ marginBottom: '100px' }}>{`Your accuracy measure is ${accuracy} % `}</h3>
-            <button onClick={onSuccess(true)}>Go to test</button>
+            <button onClick={() => onSuccess(true)}>Go to test</button>
             <button onClick={recalibrate}>Recalibrate</button>
         </div>
     )
