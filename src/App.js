@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
-import SignInPage from './pages/signIn';
-import ResultsPage from './pages/results';
+import SignInPage from './pages/signInPage';
+import ResultsPage from './pages/resultsPage';
 import TryAgainPage from './pages/tryAgain';
 import GazeCalibration from './components/gazeCalibration/gazeCalibration'
-import TestPage from "./pages/test";
+import TestPage from "./pages/testPage";
 import { PATH_CALIBRATION_PAGE, PATH_HOME, PATH_RESULTS_PAGE, PATH_SING_IN_PAGE, PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME, SAVED_USER_RESULT } from "./constants";
 
 
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <ul style={{
+        {/* <ul style={{
           margin: '10px', display: 'flex', gap: '10px', zIndex: '2', position: 'absolute', bottom: '0', right: '0'
         }}>
           <Link to={PATH_CALIBRATION_PAGE}>Clibration</Link>
@@ -22,7 +22,7 @@ const App = () => {
           <Link to={PATH_RESULTS_PAGE}>Results</Link>
           <Link to={PATH_TRY_AGAIN_PAGE}>Tryagain</Link>
           <Link to={PATH_SING_IN_PAGE}>Login</Link>
-        </ul>
+        </ul> */}
         <Routes>
           <Route path={PATH_CALIBRATION_PAGE} element={<GazeCalibration />} />
           <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />

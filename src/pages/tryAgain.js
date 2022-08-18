@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { PATH_SING_IN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME, SAVED_USER_RESULT } from "../constants";
+import { PATH_SING_IN_PAGE, SAVED_USER_IS_CALIBRATED, SAVED_USER_KEY, SAVED_USER_NAME, SAVED_USER_RESULT } from "../constants";
 
 const TryAgainPage = () => {
     const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
@@ -10,6 +10,7 @@ const TryAgainPage = () => {
         localStorage.removeItem(SAVED_USER_NAME);
         localStorage.removeItem(SAVED_USER_KEY);
         localStorage.removeItem(SAVED_USER_RESULT);
+        localStorage.removeItem(SAVED_USER_IS_CALIBRATED);
         navigate(PATH_SING_IN_PAGE);
     }
 

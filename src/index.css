@@ -21,9 +21,9 @@ button {
 }
 
 #webgazerGazeDot {
-    /* display: none !important; */
+    display: none !important;
 }
 
 #webgazerVideoContainer {
-    display: none !important;
+    /* display: none !important; */
 }
