@@ -1490,20 +1490,21 @@ import * as heatmap from 'heatmap.js';
 //         y: 215.48187500000003,
 //     },
 // ];
-const HeatmapViewer = ({ result = [], className, id = 'heatmapContainer' }) => {
+const HeatmapViewer = ({ result = [], className, style, id = 'heatmapContainer', config }) => {
     useEffect(() => {
         const heatmapInstance = heatmap.create({
-            container: document.getElementById('heatmapContainer'),
+            container: document.getElementById(id),
+            ...config,
         });
         if (result?.length) {
             const dataPoint = result.map((e) => ({
                 x: e.x > 0 ? Math.round(e.x) : 0,
                 y: e.y > 0 ? Math.round(e.y) : 0,
-                value: 1,
+                value: 100,
             }));
             const data = {
-                max: 500,
-                min: -100,
+                max: 200,
+                min: 0,
                 data: dataPoint,
             };
             // console.log('data', data);
@@ -1512,7 +1513,7 @@ const HeatmapViewer = ({ result = [], className, id = 'heatmapContainer' }) => {
     });
 
     return (
-        <div style={{ width: '100%', height: '100%' }} className={className}>
+        <div style={{ width: '100%', height: '100%', ...style }} className={className}>
             <div style={{ width: '100%', height: '100%' }} id={id || 'heatmapContainer'}></div>
         </div>
     );

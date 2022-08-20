@@ -35,7 +35,13 @@ const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonL
               <React.Fragment>
                   <div className={s.modalOverlay}></div>
                   <div className={s.wrapper}>
-                      <div className={s.modal} aria-modal aria-hidden tabIndex={-1} role="dialog">
+                      <div
+                          className={classNames(s.modal, gs.box)}
+                          aria-modal
+                          aria-hidden
+                          tabIndex={-1}
+                          role="dialog"
+                      >
                           <h1>{header}</h1>
                           {bodyText && <p>{bodyText}</p>}
                           {bodyContent}

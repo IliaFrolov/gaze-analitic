@@ -14,3 +14,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.box {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border: 0 solid black;
+    border-width: 3px 5px 5px 3px;
+    padding: 3rem;
+}

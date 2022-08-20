@@ -7,6 +7,7 @@ import { tests } from '../pages/testPage';
 import { Logout } from './signInPage';
 import { useNavigate } from 'react-router-dom';
 import s from './resultsPage.module.css';
+import gs from './../styles/global.module.css';
 import classNames from 'classnames';
 import Button from '../components/button/botton';
 
@@ -45,7 +46,7 @@ const ResultsPage = () => {
     if (isLoading) return <Spinner />;
     return (
         <div className={classNames(s.pageWrapper)}>
-            <div className={s.pageContent}>
+            <div className={classNames(s.pageContent, gs.box)}>
                 <div className={s.header}>
                     <h1>Results of {savedName}</h1>
                     <Button
@@ -82,7 +83,7 @@ const ResultsPage = () => {
                                         position: 'absolute',
                                     }}
                                 >
-                                    <div style={{}}>
+                                    <div className={s.testetUi}>
                                         {
                                             tests.find(
                                                 (t) => t.id === result[currentResultId].testName,
@@ -94,6 +95,12 @@ const ResultsPage = () => {
                                         className={s.heatmapViewer}
                                         key={currentResultId + 'key'}
                                         result={result[currentResultId].result}
+                                        config={{
+                                            radius: 50,
+                                            maxOpacity: 0.9,
+                                            minOpacity: 0,
+                                            blur: 0.95,
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -101,6 +108,7 @@ const ResultsPage = () => {
                     </div>
                 )}
             </div>
+            {/* <HeatmapViewer id="backgroundHeatmap" result={[]} /> */}
             {/* {result && currentResultId && (
                 <HeatmapViewer
                     id="backgroundHeatmap"

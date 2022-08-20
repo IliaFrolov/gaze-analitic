@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button/botton';
@@ -71,8 +72,8 @@ const SignInPage = () => {
 
     return (
         <div className={gs.flexFullScreenCenterCenter}>
-            <form className={gs.flexWrapperRowCenter}>
-                <div>
+            <form className={classNames(gs.flexWrapperRowCenter, gs.box)}>
+                <div style={{ position: 'relative' }}>
                     <input
                         className={s.input}
                         type="text"
@@ -85,9 +86,22 @@ const SignInPage = () => {
                         placeholder="Full name"
                         aria-label="fullname"
                     />
+                    {error && (
+                        <p
+                            style={{
+                                top: '100%',
+                                color: 'red',
+                                position: 'absolute',
+                                width: '100%',
+                                textAlign: 'center',
+                                margin: '0.5rem 0',
+                            }}
+                        >
+                            {error}
+                        </p>
+                    )}
                 </div>
 
-                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div>
                     <Button disabled={!isValid} onClick={onSubmit}>
                         Start
