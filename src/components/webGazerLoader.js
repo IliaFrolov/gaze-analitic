@@ -76,8 +76,12 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
         }
     };
 
-    const stop = () => {
-        window.webgazer.pause();
+    const stop = (end) => {
+        if (end) {
+            window.webgazer.end();
+        } else {
+            window.webgazer.pause();
+        }
     };
 
     const resume = () => {
