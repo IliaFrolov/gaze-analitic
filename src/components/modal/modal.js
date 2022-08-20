@@ -1,11 +1,35 @@
+import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Button from '../button/botton';
+import gs from './../../styles/global.module.css';
 import s from './modal.module.css';
-const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent }) => {
-    const onAction = () => {
+const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonLabel = 'OK' }) => {
+    const onAction = (action) => {
         hide();
         action();
     };
+
+    const renderButton = () => {
+        if (Array.isArray(action) || Array.isArray(buttonLabel)) {
+            return buttonLabel.map((lbl, idx, arr) => (
+                <Button
+                    key={lbl + idx}
+                    primary={idx === arr.length - 1}
+                    data-dismiss="modal"
+                    onClick={() => onAction(action[idx])}
+                >
+                    {lbl}
+                </Button>
+            ));
+        }
+        return (
+            <Button data-dismiss="modal" onClick={() => onAction(action)}>
+                {buttonLabel}
+            </Button>
+        );
+    };
+
     return isShowing
         ? ReactDOM.createPortal(
               <React.Fragment>
@@ -15,9 +39,9 @@ const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent }) => {
                           <h1>{header}</h1>
                           {bodyText && <p>{bodyText}</p>}
                           {bodyContent}
-                          <button type="button" data-dismiss="modal" onClick={onAction}>
-                              Ok
-                          </button>
+                          <div className={classNames(s.buttonWrapper, gs.flexWrapperRowCenter)}>
+                              {renderButton()}
+                          </div>
                       </div>
                   </div>
               </React.Fragment>,

@@ -21,6 +21,10 @@
     z-index: 90;
 }
 
+.buttonWrapper {
+    margin-top: 3rem;
+}
+
 .modal {
     width: 70vw;
     height: 50vh;
@@ -30,14 +34,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 100px;
+    padding: 3rem;
 }
 
 .modal h1 {
-    margin-bottom: 100px;
+    margin-bottom: 3rem;
     text-align: center;
-}
-
-.modal button {
-    margin-top: 100px;
 }

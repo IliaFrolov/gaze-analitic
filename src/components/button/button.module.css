@@ -1,0 +1,62 @@
+.button {
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    border-color: black !important;
+    border-style: solid;
+    border-width: 3px;
+    border-width: 3px 5px 5px 3px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 1rem;
+    max-height: 3rem;
+    line-height: 1rem;
+    color: black !important;
+
+    /* box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1); */
+}
+
+.button:hover {
+    border-width: 3px;
+    margin-right: 2px;
+    /* box-shadow: 0 0 0px 0px rgba(0, 0, 0, 1); */
+}
+
+.button:active {
+    border-width: 5px 3px 3px 5px;
+    /* box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1); */
+}
+
+/*Primary*/
+.buttonPrimary {
+    background: black !important;
+    color: white !important;
+    /* border-color: gray black black gray !important; */
+}
+
+.buttonPrimary:hover {
+    box-shadow: inset 1px 1px 0px 0px rgba(255, 255, 255, 1);
+}
+
+/* Disabled */
+.buttonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-width: 3px;
+}
+.buttonDisabled:hover,
+.buttonDisabled:active {
+    border-width: 3px !important;
+}
+
+/* Pushed */
+.buttonPushed {
+    background: black !important;
+    color: white !important;
+    border-width: 5px 3px 3px 5px !important;
+    box-shadow: inset 1px 1px 0px 0px rgba(255, 255, 255, 1);
+}

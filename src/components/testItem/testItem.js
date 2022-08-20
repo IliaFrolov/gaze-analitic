@@ -2,18 +2,25 @@ import React, { useEffect, useRef, useState } from 'react';
 import useModal from '../../hooks/useModal';
 import Modal from '../modal/modal';
 
-const TestItem = ({ id, title, description, time, stop, resume, testComponent, processResult }) => {
-    const { isShowing, toggle } = useModal(true);
+const TestItem = ({
+    id,
+    title,
+    startDescription,
+    endDescription,
+    time,
+    stop,
+    resume,
+    testComponent,
+    processResult,
+    goNext,
+    isLast,
+}) => {
+    const { isShowing: startModalShow, toggle: toggleStartModal } = useModal(true);
+    const { isShowing: endModalShow, toggle: toggleEndModal } = useModal(false);
     const [started, setStarted] = useState(false);
     const testTimer = useRef(null);
     const [isTimerFinished, setIsTimerFinished] = useState(false);
-
-    const retry = () => {
-        stop();
-        toggle();
-        setStarted(false);
-        clearTimeout(testTimer.current);
-    };
+    const [isProcessed, setIsProcessed] = useState(false);
 
     const startTest = () => {
         setStarted(true);
@@ -21,20 +28,25 @@ const TestItem = ({ id, title, description, time, stop, resume, testComponent, p
     };
 
     useEffect(() => {
-        if (isTimerFinished) {
-            processResult();
+        if (isTimerFinished && !isProcessed) {
+            const screenSize = { height: window.innerHeight, width: window.innerWidth };
+            setIsProcessed(true);
+            processResult(id, screenSize);
             stop();
         }
-    }, [isTimerFinished, processResult]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isTimerFinished, processResult, isProcessed]);
 
     useEffect(() => {
         if (time > 0 && started && !testTimer.current) {
+            console.log('Created timer');
             testTimer.current = setTimeout(() => {
                 setIsTimerFinished(true);
+                toggleEndModal();
                 console.log('Time is over');
             }, time);
         }
-    }, [started, time, processResult]);
+    }, [started, time, processResult, id, toggleEndModal]);
 
     useEffect(() => {
         return () => {
@@ -42,20 +54,30 @@ const TestItem = ({ id, title, description, time, stop, resume, testComponent, p
                 clearTimeout(testTimer.current);
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // console.log('Timer', testTimer.current);
     return (
         <div>
             <Modal
-                isShowing={isShowing}
+                isShowing={startModalShow}
                 action={startTest}
-                hide={toggle}
+                hide={toggleStartModal}
                 header={title}
-                bodyContent={description}
+                bodyContent={startDescription}
+                b
             />
             {testComponent}
-            <button onClick={retry}>Retry</button>
-            <button onClick={stop}>stop</button>
+            <Modal
+                isShowing={endModalShow}
+                action={goNext}
+                hide={toggleEndModal}
+                header={title}
+                bodyContent={endDescription}
+                buttonLabel={isLast ? 'Ok' : 'Next'}
+            />
+            {/* <button onClick={retry}>Retry</button> */}
         </div>
     );
 };

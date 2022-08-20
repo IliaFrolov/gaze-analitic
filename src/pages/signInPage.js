@@ -1,24 +1,39 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/button/botton';
+import {
+    PATH_HOME,
+    PATH_SING_IN_PAGE,
+    SAVED_USER_IS_CALIBRATED,
+    SAVED_USER_KEY,
+    SAVED_USER_NAME,
+    SAVED_USER_HAS_RESULT,
+} from '../constants';
+import { createUser } from '../firebase/api';
+import gs from './../styles/global.module.css';
+import s from './signInPage.module.css';
 
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { PATH_HOME, PATH_TRY_AGAIN_PAGE, SAVED_USER_KEY, SAVED_USER_NAME } from "../constants";
-import { createUser } from "../firebase/api";
-import s from './pages.module.css';
+const Logout = (navigate) => {
+    localStorage.removeItem(SAVED_USER_NAME);
+    localStorage.removeItem(SAVED_USER_KEY);
+    localStorage.removeItem(SAVED_USER_HAS_RESULT);
+    localStorage.removeItem(SAVED_USER_IS_CALIBRATED);
+    navigate(PATH_SING_IN_PAGE);
+};
 
 const SignInPage = () => {
     const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
     const savedKey = JSON.parse(localStorage.getItem(SAVED_USER_KEY));
 
-    const [name, setName] = useState("");
-    const [isValid, setValid] = useState(false)
-
+    const [name, setName] = useState('');
+    const [isValid, setValid] = useState(false);
 
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (savedName && savedKey) {
-            navigate(PATH_TRY_AGAIN_PAGE, { replace: true });
+            navigate(PATH_HOME, { replace: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [savedName, savedKey]);
@@ -28,11 +43,17 @@ const SignInPage = () => {
         let errors = [];
         let formIsValid = true;
         setValid(formIsValid);
-        if (name.length < 3) { errors.push('too short name'); formIsValid = false; };
-        if (name.length > 10) { errors.push('too long name'); formIsValid = false; };
-        setError(errors.join(', '))
+        if (name.length < 3) {
+            errors.push('too short name');
+            formIsValid = false;
+        }
+        if (name.length > 10) {
+            errors.push('too long name');
+            formIsValid = false;
+        }
+        setError(errors.join(', '));
         setValid(formIsValid);
-        return (formIsValid);
+        return formIsValid;
     };
 
     const onSubmit = async (e) => {
@@ -45,15 +66,15 @@ const SignInPage = () => {
                 localStorage.setItem(SAVED_USER_KEY, JSON.stringify(key));
                 navigate(PATH_HOME);
             });
-        };
+        }
     };
 
-
     return (
-        <div className={s.flexFullScreenCenterCenter}>
-            <form className={s.flexCenterAuto}>
+        <div className={gs.flexFullScreenCenterCenter}>
+            <form className={gs.flexWrapperRowCenter}>
                 <div>
                     <input
+                        className={s.input}
                         type="text"
                         value={name}
                         onChange={(e) => {
@@ -68,20 +89,13 @@ const SignInPage = () => {
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div>
-                    <button
-                        disabled={!isValid}
-                        onClick={onSubmit}
-                    >
+                    <Button disabled={!isValid} onClick={onSubmit}>
                         Start
-                    </button>
+                    </Button>
                 </div>
-
             </form>
         </div>
-
-
-
-    )
-}
-
-export default SignInPage
+    );
+};
+export { Logout };
+export default SignInPage;

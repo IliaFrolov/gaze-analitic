@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
+import gs from './../../styles/global.module.css';
 import s from './gazeCalibration.module.css';
 import { calculatePrecision } from '../../utils/precisionUtils';
 import Modal from '../modal/modal';
 import useModal from '../../hooks/useModal';
 import './style.css';
+import Button from '../button/botton';
 
 const Calibration = ({ onSuccess, start, stop, resume }) => {
     const defaultCalibrationButtons = {
@@ -70,6 +72,7 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
         if (idReadyToMeasure) {
             stop();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [step, idReadyToMeasure]);
 
     const precisionMeasurement = () => {
@@ -149,8 +152,12 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
     const thirdStep = () => (
         <div className={s.calibrationWrapper}>
             <h3 style={{ marginBottom: '100px' }}>{`Your accuracy measure is ${accuracy} % `}</h3>
-            <button onClick={() => onSuccess(true)}>Go to test</button>
-            <button onClick={recalibrate}>Recalibrate</button>
+            <div className={gs.flexWrapperRowCenter}>
+                <Button onClick={recalibrate}>Recalibrate</Button>
+                <Button primary onClick={() => onSuccess(true)}>
+                    Go to test
+                </Button>
+            </div>
         </div>
     );
 

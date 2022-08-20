@@ -7,7 +7,7 @@ import Spinner from './spinner';
 import { useNavigate } from 'react-router-dom';
 import { PATH_HOME, SAVED_USER_IS_CALIBRATED } from '../constants';
 
-export const WebGazerLoader = ({ children, setUserIsCalibrated, component }) => {
+export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
     const [isLoading, setLoading] = useState(true);
     const [x, setX] = useState(-1);
     const [y, setY] = useState(-1);
@@ -25,7 +25,7 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated, component }) => 
             setSessionResult((prev) => [...prev, { x, y }]);
             // sessionResultArr.push({ x, y })
         }
-    }, [x, y]);
+    }, [x, y, calibrated]);
 
     // const Component = component;
 
@@ -135,10 +135,10 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated, component }) => 
                     resume={resume}
                     onSuccess={onSuccessCalibration}
                 />
-            ) : (
-                // childrenWithProps
+            ) : // childrenWithProps
+            children ? (
                 children(sessionResult, { stop, resume, start })
-            )}
+            ) : null}
             <canvas
                 id="plotting_canvas"
                 width="500"
