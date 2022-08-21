@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/modal';
 import TestItem from '../../components/testItem';
@@ -13,7 +13,8 @@ import {
 import { pushUserResult } from '../../firebase/api';
 import useModal from '../../hooks/useModal';
 import Logout from './../../components/logout';
-import tests from '../../testScreens';
+import genTests from '../../testScreens/testsCopm';
+import { useTranslation } from 'react-i18next';
 // require('./../utils/resizeUtils');
 
 const TestPage = () => {
@@ -21,7 +22,7 @@ const TestPage = () => {
     const hasResult = JSON.parse(localStorage.getItem(SAVED_USER_HAS_RESULT));
     const navigate = useNavigate();
     const { isShowing, toggle } = useModal(false);
-    // const navigateForward = () => navigate(PATH_TRY_AGAIN_PAGE)
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (hasResult) {
@@ -41,23 +42,11 @@ const TestPage = () => {
     };
 
     const finishTesting = () => {
-        console.log('finishTesting action');
         localStorage.setItem(SAVED_USER_HAS_RESULT, JSON.stringify(true));
         toggle(true);
-        // window.localstream.getTracks()[0].stop();
-        navigator.getUserMedia(
-            { audio: false, video: true },
-            function (stream) {
-                // can also use getAudioTracks() or getVideoTracks()
-                var track = stream.getTracks()[0]; // if only one media track
-                // ...
-                track.stop();
-            },
-            function (error) {
-                console.log('getUserMedia() error', error);
-            },
-        );
     };
+
+    const tests = genTests();
 
     return (
         <>
@@ -68,10 +57,9 @@ const TestPage = () => {
                               tests={tests}
                               {...aditionalProps}
                               finishTesting={finishTesting}
-                              processResult={(id, screenSize) => {
-                                  console.log('processResult', id);
-                                  pushResult({ testName: id, result: sessionResult, screenSize });
-                              }}
+                              processResult={(id, screenSize) =>
+                                  pushResult({ testName: id, result: sessionResult, screenSize })
+                              }
                           />
                       )
                     : null}
@@ -79,14 +67,13 @@ const TestPage = () => {
             <Modal
                 isShowing={isShowing}
                 action={[() => Logout(navigate), () => navigate(PATH_RESULTS_PAGE)]}
-                buttonLabel={['Logout', 'Results']}
+                buttonLabel={[t('thanks-logout-label'), t('thanks-results-label')]}
                 hide={toggle}
-                header={'Thank you for passing all tests'}
-                bodyText={'Now you can view your results or logout and try again'}
+                header={t('thanks-title')}
+                bodyText={t('thanks-text')}
             />
         </>
     );
 };
 
-export { tests };
 export default TestPage;

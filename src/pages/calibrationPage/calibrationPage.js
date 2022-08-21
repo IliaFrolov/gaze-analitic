@@ -7,6 +7,7 @@ import Button from '../../components/button/botton';
 import gs from './../../styles/global.module.css';
 import s from './calibrationPage.module.css';
 import './style.css';
+import { useTranslation } from 'react-i18next';
 
 const Calibration = ({ onSuccess, start, stop }) => {
     const defaultCalibrationButtons = {
@@ -25,6 +26,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
     const [pointCalibrate, setPointCalibrate] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
     const idReadyToMeasure = step === '2';
+    const { t } = useTranslation();
 
     const { isShowing: isShowing1, toggle: toggle1 } = useModal(true);
     const { isShowing: isShowing2, toggle: toggle2 } = useModal(true);
@@ -61,6 +63,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
 
     useEffect(() => {
         if (idReadyToMeasure) {
+            window.webgazer.showVideo(false);
             stop();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,36 +121,36 @@ const Calibration = ({ onSuccess, start, stop }) => {
 
     const calibrationDesription = (
         <ul>
-            <li>Please seet in from of your webcamera;</li>
-            <li>Allow use your camera if you will see corresponding dialog;</li>
-            <li>Your face must fit into green square of camera preview;</li>
+            <li>{t('calibration-instruction-1')}</li>
+            <li>{t('calibration-instruction-2')}</li>
+            <li>{t('calibration-instruction-3')}</li>
             <li>
-                The blue dot &nbsp;
+                {t('calibration-instruction-4-1')} &nbsp;
                 <div className={s.blueDot} />
-                &nbsp; is a visulisation of your gaze location prediction;
+                &nbsp; {t('calibration-instruction-4-2')}
             </li>
             <li>
-                Please click each red button &nbsp;
+                {t('calibration-instruction-5-1')} &nbsp;
                 <button
                     className={cn(s.calibrationBtn, s.btnText)}
                     style={{ opacity: '0.2' }}
                     disabled
                 ></button>
-                &nbsp; 5 times utill it beacome yellow &nbsp;
+                &nbsp;{t('calibration-instruction-5-2')} &nbsp;
                 <button className={cn(s.calibrationBtn, s.passed, s.btnText)} disabled></button>
                 &nbsp; ;
             </li>
-            <li>Please look on the button when you click it;</li>
+            <li>{t('calibration-instruction-6')} </li>
         </ul>
     );
 
     const measurementDesription = (
         <ul>
-            <li>Please do not move your mouse;</li>
+            <li>{t('measurement-instruction-1')} </li>
             <li>
-                To measure accuracy of calibration look on the button &nbsp;
+                {t('measurement-instruction-2-1')} &nbsp;
                 <button className={cn(s.calibrationBtn, s.btnText)} disabled></button>
-                &nbsp; during 5 seconds;
+                &nbsp; {t('measurement-instruction-2-2')}
             </li>
         </ul>
     );
@@ -156,8 +159,9 @@ const Calibration = ({ onSuccess, start, stop }) => {
         <div className={s.calibrationWrapper}>
             {renderButtons()}
             <Modal
-                header="Calibration"
+                header={t('calibration-title')}
                 bodyContent={calibrationDesription}
+                buttonLabel={t('calibration-start-label')}
                 isShowing={isShowing1}
                 hide={toggle1}
                 action={() => {
@@ -171,11 +175,12 @@ const Calibration = ({ onSuccess, start, stop }) => {
     const secondStep = () => (
         <div className={s.calibrationWrapper}>
             <Modal
-                header="Precision measurement"
+                header={t('measurement-title')}
                 bodyContent={measurementDesription}
                 isShowing={isShowing2}
                 hide={toggle2}
                 action={precisionMeasurement}
+                buttonLabel={t('measurement-start-label')}
             />
             <button id="id5" className={cn(s.calibrationBtn, s[`btn-id5`])}></button>
         </div>
@@ -183,18 +188,19 @@ const Calibration = ({ onSuccess, start, stop }) => {
 
     const thirdStep = () => (
         <div className={s.calibrationWrapper}>
-            <h3 style={{ marginBottom: '100px' }}>{`Your accuracy measure is ${accuracy} % `}</h3>
-            <p>Recommended accuracy to continue testing is more then 70%</p>
+            <h3 style={{ marginBottom: '100px' }}>{`${t(
+                'measurement-result-title',
+            )} ${accuracy} % `}</h3>
+            <p>{t('measurement-result-text')}</p>
             <div className={gs.flexWrapperRowCenter}>
-                <Button onClick={recalibrate}>Recalibrate</Button>
+                <Button onClick={recalibrate}>{t('measurement-recalibrate-label')}</Button>
                 <Button
                     primary
                     onClick={() => {
                         onSuccess(true);
-                        window.webgazer.showVideo(false);
                     }}
                 >
-                    Go to test
+                    {t('measurement-continue-label')}
                 </Button>
             </div>
         </div>

@@ -1,16 +1,16 @@
 import {
-    PATH_SING_IN_PAGE,
     SAVED_USER_IS_CALIBRATED,
     SAVED_USER_KEY,
     SAVED_USER_NAME,
     SAVED_USER_HAS_RESULT,
+    PATH_HOME,
 } from './../constants';
 
-const Logout = (navigate) => {
+const logout = (navigate) => {
     localStorage.removeItem(SAVED_USER_NAME);
     localStorage.removeItem(SAVED_USER_KEY);
     localStorage.removeItem(SAVED_USER_HAS_RESULT);
     localStorage.removeItem(SAVED_USER_IS_CALIBRATED);
-    navigate(PATH_SING_IN_PAGE);
+    navigate(PATH_HOME);
 };
-export default Logout;
+export default logout;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useModal from '../../hooks/useModal';
 import Modal from '../modal/modal';
 
@@ -13,7 +14,8 @@ const TestItem = ({
     testComponent,
     processResult,
     goNext,
-    isLast,
+    number,
+    total,
 }) => {
     const { isShowing: startModalShow, toggle: toggleStartModal } = useModal(true);
     const { isShowing: endModalShow, toggle: toggleEndModal } = useModal(false);
@@ -21,6 +23,7 @@ const TestItem = ({
     const testTimer = useRef(null);
     const [isTimerFinished, setIsTimerFinished] = useState(false);
     const [isProcessed, setIsProcessed] = useState(false);
+    const { t } = useTranslation();
 
     const startTest = () => {
         setStarted(true);
@@ -32,7 +35,7 @@ const TestItem = ({
             const screenSize = { height: window.innerHeight, width: window.innerWidth };
             setIsProcessed(true);
             processResult(id, screenSize);
-            stop(isLast);
+            stop(number === total);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isTimerFinished, processResult, isProcessed]);
@@ -57,7 +60,8 @@ const TestItem = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // console.log('Timer', testTimer.current);
+    const headerInfo = <span>{`${number}/${total}`}</span>;
+
     return (
         <>
             <Modal
@@ -66,7 +70,8 @@ const TestItem = ({
                 hide={toggleStartModal}
                 header={title}
                 bodyText={startDescription}
-                b
+                buttonLabel={t('test-start-label')}
+                headerInfo={headerInfo}
             />
             {testComponent}
             <Modal
@@ -75,7 +80,8 @@ const TestItem = ({
                 hide={toggleEndModal}
                 header={title}
                 bodyText={endDescription}
-                buttonLabel={isLast ? 'Ok' : 'Next'}
+                buttonLabel={number === total ? t('test-last-label') : t('test-next-label')}
+                headerInfo={headerInfo}
             />
             {/* <button onClick={retry}>Retry</button> */}
         </>

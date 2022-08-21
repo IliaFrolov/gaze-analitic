@@ -90,7 +90,7 @@
     border-color: rgba(255, 255, 255, 0.8) black black rgba(255, 255, 255, 0.8) !important;
 }
 .buttonPrimary:hover::before {
-    transform: translateX(300px) skewX(45deg);
+    transform: translateX(500px) skewX(45deg);
     opacity: 0.6;
 }
 .buttonPrimary:hover:after {
@@ -100,7 +100,7 @@
     background-position: 50% 100%;
 }
 .buttonPrimary:active::before {
-    transform: translateX(-300px);
+    transform: translateX(-500px);
     opacity: 0.6;
 }
 .buttonPrimary:active:after {

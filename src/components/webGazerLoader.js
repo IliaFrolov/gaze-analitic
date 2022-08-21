@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { PATH_HOME, SAVED_USER_IS_CALIBRATED } from '../constants';
 import Script from 'react-load-script';
 import useModal from '../hooks/useModal';
 import Calibration from './../pages/calibrationPage';
 import Modal from './modal/modal';
 import Spinner from './spinner';
-import { useNavigate } from 'react-router-dom';
-import { PATH_HOME, SAVED_USER_IS_CALIBRATED } from '../constants';
+import { useTranslation } from 'react-i18next';
+import logout from './logout';
 
 export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
+    const { t } = useTranslation();
     const [isLoading, setLoading] = useState(true);
     const [x, setX] = useState(-1);
     const [y, setY] = useState(-1);
@@ -19,7 +21,6 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
     // const [webgazerIsReady, setWebgazerIsReady] = useState(false);
     const [error, setError] = useState(null);
     const { isShowing, toggle } = useModal();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (x !== -1 && y !== x && calibrated) {
@@ -41,7 +42,6 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
                     if (data == null) {
                         return;
                     }
-                    // console.log({ data });
                     setX(data.x);
                     setY(data.y);
                 }),
@@ -66,7 +66,7 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
                 webgazerInstance.begin();
             } catch (e) {
                 setError(e);
-                console.log('start', e);
+                console.log('start-error', e);
             }
         }
     };
@@ -97,17 +97,17 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
                 <Modal
                     isShowing={isShowing}
                     hide={toggle}
-                    header="Error"
+                    header={t('error-title')}
                     bodyText={error?.message || error}
-                    action={() => navigate(PATH_HOME)}
+                    action={() => logout(PATH_HOME)}
+                    buttonLabel={t('error-btn-label')}
                 />
             )}
             {isLoading ? (
                 <Spinner />
             ) : !calibrated ? (
                 <Calibration start={start} stop={stop} onSuccess={onSuccessCalibration} />
-            ) : // childrenWithProps
-            children ? (
+            ) : children ? (
                 children(sessionResult, { stop, start })
             ) : null}
             <canvas

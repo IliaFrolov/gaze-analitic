@@ -1,11 +1,22 @@
 import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 import Button from '../button/botton';
 import gs from './../../styles/global.module.css';
 import s from './modal.module.css';
 
-const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonLabel = 'OK' }) => {
+const Modal = ({
+    isShowing,
+    hide,
+    action,
+    header,
+    bodyText,
+    bodyContent,
+    buttonLabel,
+    headerInfo,
+}) => {
+    const { t } = useTranslation();
     const onAction = (action) => {
         hide();
         action();
@@ -26,7 +37,7 @@ const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonL
         }
         return (
             <Button data-dismiss="modal" onClick={() => onAction(action)}>
-                {buttonLabel}
+                {buttonLabel || t('ok-label')}
             </Button>
         );
     };
@@ -43,7 +54,10 @@ const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonL
                           tabIndex={-1}
                           role="dialog"
                       >
-                          <h1>{header}</h1>
+                          <div className={s.header}>
+                              <h1>{header}</h1>
+                              {headerInfo}
+                          </div>
                           <div className={s.body}>
                               {bodyText && <p>{bodyText}</p>}
                               {bodyContent}

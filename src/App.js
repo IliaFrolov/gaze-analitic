@@ -46,15 +46,6 @@ const App = () => {
     return (
         <div className="App">
             <BrowserRouter>
-                {/* <ul style={{
-          margin: '10px', display: 'flex', gap: '10px', zIndex: '2', position: 'absolute', bottom: '0', right: '0'
-        }}>
-          <Link to={PATH_CALIBRATION_PAGE}>Clibration</Link>
-          <Link to={PATH_HOME}>Test</Link>
-          <Link to={PATH_RESULTS_PAGE}>Results</Link>
-          <Link to={PATH_TRY_AGAIN_PAGE}>Tryagain</Link>
-          <Link to={PATH_SING_IN_PAGE}>Login</Link>
-        </ul> */}
                 <Routes>
                     {/* <Route path={PATH_CALIBRATION_PAGE} element={<GazeCalibration />} /> */}
                     <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />
@@ -118,7 +109,7 @@ function RequireAuth({ children }) {
     let location = useLocation();
 
     if (!savedName || !savedKey) {
-        return <Navigate to={PATH_SING_IN_PAGE} state={{ from: location }} replace />;
+        return <Navigate to={PATH_HOME} state={{ from: location }} replace />;
     }
 
     return children;

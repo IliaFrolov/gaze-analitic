@@ -10,6 +10,7 @@ import s from './signinForm.module.css';
 import Checkbox from '../checkbox/checkbox';
 import useModal from '../../hooks/useModal';
 import Modal from '../modal';
+import { useTranslation } from 'react-i18next';
 
 const SignInForm = ({ className, nextPath }) => {
     const [name, setName] = useState('');
@@ -17,6 +18,7 @@ const SignInForm = ({ className, nextPath }) => {
     const [isAccepted, setIsAccepted] = useState(false);
     const [isBlured, setIsBlured] = useState(false);
     const { isShowing, toggle } = useModal();
+    const { t } = useTranslation();
 
     const [error, setError] = useState({});
     const navigate = useNavigate();
@@ -32,15 +34,15 @@ const SignInForm = ({ className, nextPath }) => {
         let formIsValid = true;
         setValid(formIsValid);
         if (name.length < 3) {
-            errors.name = 'too short name';
+            errors.name = t('signin-error-short');
             formIsValid = false;
         }
-        if (name.length > 10) {
-            errors.name = 'too long name';
+        if (name.length > 20) {
+            errors.name = t('signin-error-long');
             formIsValid = false;
         }
         if (!isAccepted) {
-            errors.tac = 'needs accept terms and conditions';
+            errors.tac = t('signin-error-toc');
             formIsValid = false;
         }
         setError(errors);
@@ -61,28 +63,15 @@ const SignInForm = ({ className, nextPath }) => {
     };
     const tacContent = (
         <div>
+            <p>{t('toc-body')}</p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, nulla at
-                facilisis porttitor, odio orci sodales sem, faucibus scelerisque libero urna sit
-                amet erat. Duis ipsum erat, luctus id ultricies in, sodales sed erat. Etiam vitae
-                nunc sem. Donec in metus odio. Morbi luctus ligula elementum odio dignissim, eget
-                vehicula lacus posuere. In sed sem tincidunt magna mattis rutrum. Phasellus suscipit
-                a mauris iaculis vestibulum. Vivamus id placerat justo. Praesent ut egestas risus,
-                eu eleifend odio. Cras viverra, erat id porttitor sollicitudin, ipsum mauris
-                fringilla odio, sit amet varius purus sapien id erat. Vestibulum nec lorem vitae
-                ipsum posuere posuere. Pellentesque habitant morbi tristique senectus et netus et
-                malesuada fames ac turpis egestas. Phasellus aliquam, lorem sit amet ullamcorper
-                interdum, tortor velit euismod odio, at tempus dolor erat consequat purus. Duis vel
-                sapien nulla. Phasellus orci dui, porta id vulputate vel, congue eu mi.
-            </p>
-            <p>
-                <a target="_blank" href="*">
-                    Link on project github repo
+                <a target="_blank" href="github.com">
+                    {t('toc-project-link')}
                 </a>
             </p>
             <p>
-                <a target="_blank" href="*">
-                    Link on repo of webgazer
+                <a target="_blank" href="github.com">
+                    {t('toc-lib-link')}
                 </a>
             </p>
         </div>
@@ -100,7 +89,7 @@ const SignInForm = ({ className, nextPath }) => {
                             // handleValidation();
                         }}
                         onBlur={() => setIsBlured(true)}
-                        placeholder="Nick name"
+                        placeholder={t('signin-nickname')}
                         aria-label="Nick name"
                     />
                     {error.name && <p className={s.error}>{error.name}</p>}
@@ -112,7 +101,8 @@ const SignInForm = ({ className, nextPath }) => {
                             setIsAccepted((prev) => !prev);
                         }}
                     >
-                        I'm accept{' '}
+                        {t('signin-checkbox')}
+                        {'  '}
                         <a
                             style={{ display: 'contents' }}
                             href="#"
@@ -121,7 +111,7 @@ const SignInForm = ({ className, nextPath }) => {
                                 toggle();
                             }}
                         >
-                            terms and conditions
+                            {t('signin-toc-link')}
                         </a>
                     </Checkbox>
                     {error.tac && <p className={s.error}>{error.tac}</p>}
@@ -129,17 +119,17 @@ const SignInForm = ({ className, nextPath }) => {
 
                 <div className={s.inputLine}>
                     <Button disabled={!isValid} onClick={onSubmit}>
-                        Start
+                        {t('signin-submit-btn-label')}
                     </Button>
                 </div>
             </form>
             <Modal
-                header="Terms and conditions"
+                header={t('toc-lib-header')}
                 bodyContent={tacContent}
                 isShowing={isShowing}
                 hide={toggle}
                 action={() => setIsAccepted(true)}
-                buttonLabel="Accept"
+                buttonLabel={t('toc-lib-submit-btn-label')}
             />
         </>
     );

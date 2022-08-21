@@ -1,3 +1,64 @@
 {
-    "welcome": "Ласкаво просимо"
+    "1test-title": "Назва тесту 1",
+    "1test-start-description": "пояснення тесту 1",
+    "1test-end-description": "тест 1 опис подяки",
+
+    "welcome-header": "Ласкаво просимо ✨",
+    "welcome-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, nulla at facilisis porttitor, odio orci sodales sem, faucibus scelerisque libero urna sit amet erat. Duis ipsum erat, luctus id ultricies in, sodales sed erat . Etiam vitae nunc sem. Donec in metus odio. Morbi luctus ligula elementum odio dignissim, eget vehicula lacus posuere. In sed sem tincidunt magna mattis rutrum. Phasellus suscipit a mauris iaculis vestibulum. Vivamus id placerat justo. Praesent ut egestas risus, eu eleifend odio. Cras viverra, erat id porttitor sollicitudin, ipsum mauris fringilla odio, sit amet varius purus sapien id erat. Vestibulum nec lorem vitae ipsum posuere posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus aliquam, lorem sit amet ullamcorper interdum, tortor velit euismod odio, at tempus dolor erat consequat purus. Duis vel sapien nulla. Phasellus orci dui, porta id vulpu tate vel, congue eu mi.",
+    "signin-error-short": "Ім'я занадто коротке",
+    "signin-error-long": "Ім'я занадто довге",
+    "signin-error-toc": "Потрібно прийняти положення та умови",
+    "signin-nickname": "Псевдонім",
+    "signin-checkbox": "Я приймаю",
+    "signin-toc-link": "умови",
+    "signin-submit-btn-label": "Почати",
+
+    "toc-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, nulla at facilisis porttitor, odio orci sodales sem, faucibus scelerisque libero urna sit amet erat. Duis ipsum erat, luctus id ultricies in, sodales sed erat . Etiam vitae nunc sem. Donec in metus odio. Morbi luctus ligula elementum odio dignissim, eget vehicula lacus posuere. In sed sem tincidunt magna mattis rutrum. Phasellus suscipit a mauris iaculis vestibulum. Vivamus id placerat justo. Praesent ut egestas risus, eu eleifend odio. Cras viverra, erat id porttitor sollicitudin, ipsum mauris fringilla odio, sit amet varius purus sapien id erat. Vestibulum nec lorem vitae ipsum posuere posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus aliquam, lorem sit amet ullamcorper interdum, tortor velit euismod odio, at tempus dolor erat consequat purus. Duis vel sapien nulla. Phasellus orci dui, porta id vulputate vel, congue eu mi.",
+    "toc-project-link": "Посилання на репо проекту github",
+    "toc-lib-link": "Посилання на сховище webgazer",
+    "toc-lib-header": "Умови",
+    "toc-lib-submit-btn-label": "Прийняти",
+
+    "instruction-title": "Інструкція",
+    "instruction-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim",
+    "instruction-to-tests-label": "Почати тестування",
+    "instruction-calibration-label": "Перейти до калібрування",
+
+    "calibration-title": "Калібрування",
+    "calibration-instruction-1": "Будь ласка, сядте перед веб-камерою;",
+    "calibration-instruction-2": "Дозвольте використовувати вашу камеру, якщо ви побачите відповідне діалогове вікно;",
+    "calibration-instruction-3": "Ваше обличчя має поміститися в зелений квадрат на єкрані камери;",
+    "calibration-instruction-4-1": "Блакитна точка ",
+    "calibration-instruction-4-2": "це візуалізація прогнозу розташування вашого погляду;",
+    "calibration-instruction-5-1": "Натисніть кожну червону кнопку ",
+    "calibration-instruction-5-2": " 5 разів, поки воня не стане жовтою ",
+    "calibration-instruction-6": "Будь ласка, дивіться на кнопку, коли ви її натискаєте;",
+    "calibration-start-label": "Почати калібрування",
+
+    "measurement-title": "Точність вимірювання",
+    "measurement-instruction-1": "Будь ласка, не рухайте мишкою;",
+    "measurement-instruction-2-1": "Щоб виміряти точність калібрування, подивіться на кнопку ",
+    "measurement-instruction-2-2": "протягом 5 секунд;",
+    "measurement-result-title": "Точність калібрування ",
+    "measurement-result-text": "Рекомендована точність для продовження тестування більше ніж 70%",
+    "measurement-start-label": "Почати",
+    "measurement-recalibrate-label": "Перекалібрувати",
+    "measurement-continue-label": "Перейти до перевірки",
+
+    "results-title": "Результати ",
+    "results-logout-label": "Вийти",
+
+    "thanks-title": "Дякуємо за проходження всіх тестів",
+    "thanks-text": "Тепер ви можете переглянути свої результати або вийти з системи та повторити спробу",
+    "thanks-logout-label": "Вийти",
+    "thanks-results-label": "Результати",
+
+    "test-start-label": "Початок",
+    "test-next-label": "Далі",
+    "test-last-label": "Добре",
+
+    "error-title": "Сталася помилка",
+    "error-btn-label": "Почати з нуля",
+
+    "ok-label": "добре"
 }

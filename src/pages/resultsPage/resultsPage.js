@@ -10,6 +10,7 @@ import s from './resultsPage.module.css';
 import gs from './../../styles/global.module.css';
 import classNames from 'classnames';
 import Button from './../../components/button';
+import { useTranslation } from 'react-i18next';
 
 const ResultsPage = () => {
     const [isLoading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ const ResultsPage = () => {
     const [result, setResult] = useState(null);
     const [currentResultId, setCurrentResultId] = useState(null);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         getUserData(savedKey, (res) => {
@@ -48,13 +50,13 @@ const ResultsPage = () => {
         <div className={classNames(s.pageWrapper)}>
             <div className={classNames(s.pageContent, gs.box)}>
                 <div className={s.header}>
-                    <h1>Results of {savedName}</h1>
+                    <h1>{`${t('results-title')} ${savedName}`}</h1>
                     <Button
                         onClick={() => {
                             Logout(navigate);
                         }}
                     >
-                        LogOut
+                        {t('results-logout-label')}
                     </Button>
                 </div>
                 {result && (

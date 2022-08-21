@@ -1,6 +1,6 @@
 .checkboxWrapper {
     position: relative;
-    cursor: pointer;
+
     display: flex;
     gap: 1rem;
 }
@@ -16,6 +16,7 @@
     height: 1rem;
     border: 2px solid black;
     background: transparent;
+    cursor: pointer;
 }
 
 .input:checked ~ .checkbox {

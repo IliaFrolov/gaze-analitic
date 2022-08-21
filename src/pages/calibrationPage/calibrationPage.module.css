@@ -37,6 +37,7 @@
 .btnText {
     display: inline-block;
     position: static;
+    cursor: auto;
 }
 
 .passed {

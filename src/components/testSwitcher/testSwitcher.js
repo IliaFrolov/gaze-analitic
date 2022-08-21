@@ -6,15 +6,13 @@ const TestSwitcher = ({ tests = [], start, stop, processResult, finishTesting })
     // const [currentTest, setCurrentTest] = useState(null);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [testsIsFinished, setFinished] = useState(false);
-    const isLast = currentIdx + 1 === testAmount;
+    const number = currentIdx + 1;
 
     const goNext = () => {
-        if (isLast) {
-            console.log('finishTesting');
+        if (number === testAmount) {
             setFinished(true);
             finishTesting();
         } else {
-            console.log('next');
             setCurrentIdx((prev) => ++prev);
         }
     };
@@ -28,7 +26,8 @@ const TestSwitcher = ({ tests = [], start, stop, processResult, finishTesting })
             stop={stop}
             start={start}
             processResult={processResult}
-            isLast={isLast}
+            number={number}
+            total={testAmount}
         />
     );
 };
