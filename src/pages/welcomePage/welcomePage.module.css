@@ -8,10 +8,21 @@
     max-width: calc(100% - 2rem);
     max-height: calc(100% - 2rem);
     overflow: hidden;
+    position: relative;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.lang {
+    /* position: absolute;
+    right: 2rem;
+    top: 1rem; */
 }
 .text {
     overflow: auto;
     font-size: 0.75rem;
+    flex: 1;
 }
 .form {
     margin: 0 auto;

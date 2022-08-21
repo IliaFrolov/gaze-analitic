@@ -20,4 +20,5 @@
 .text {
     overflow: auto;
     font-size: 0.75rem;
+    flex: 1;
 }
