@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { calculatePrecision } from '../../utils/precisionUtils';
-import Modal from '../modal/modal';
+import Modal from '../../components/modal/modal';
 import useModal from '../../hooks/useModal';
-import Button from '../button/botton';
+import Button from '../../components/button/botton';
 import gs from './../../styles/global.module.css';
-import s from './gazeCalibration.module.css';
+import s from './calibrationPage.module.css';
 import './style.css';
 
 const Calibration = ({ onSuccess, start, stop }) => {
@@ -115,12 +115,49 @@ const Calibration = ({ onSuccess, start, stop }) => {
             );
         });
     };
+
+    const calibrationDesription = (
+        <ul>
+            <li>Please seet in from of your webcamera;</li>
+            <li>Allow use your camera if you will see corresponding dialog;</li>
+            <li>Your face must fit into green square of camera preview;</li>
+            <li>
+                The blue dot &nbsp;
+                <div className={s.blueDot} />
+                &nbsp; is a visulisation of your gaze location prediction;
+            </li>
+            <li>
+                Please click each red button &nbsp;
+                <button
+                    className={cn(s.calibrationBtn, s.btnText)}
+                    style={{ opacity: '0.2' }}
+                    disabled
+                ></button>
+                &nbsp; 5 times utill it beacome yellow &nbsp;
+                <button className={cn(s.calibrationBtn, s.passed, s.btnText)} disabled></button>
+                &nbsp; ;
+            </li>
+            <li>Please look on the button when you click it;</li>
+        </ul>
+    );
+
+    const measurementDesription = (
+        <ul>
+            <li>Please do not move your mouse;</li>
+            <li>
+                To measure accuracy of calibration look on the button &nbsp;
+                <button className={cn(s.calibrationBtn, s.btnText)} disabled></button>
+                &nbsp; during 5 seconds;
+            </li>
+        </ul>
+    );
+
     const firstStep = () => (
         <div className={s.calibrationWrapper}>
             {renderButtons()}
             <Modal
                 header="Calibration"
-                bodyText="blabbla blaala"
+                bodyContent={calibrationDesription}
                 isShowing={isShowing1}
                 hide={toggle1}
                 action={() => {
@@ -135,7 +172,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
         <div className={s.calibrationWrapper}>
             <Modal
                 header="Precision measurement"
-                bodyText="blabbla blaala"
+                bodyContent={measurementDesription}
                 isShowing={isShowing2}
                 hide={toggle2}
                 action={precisionMeasurement}
@@ -147,6 +184,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
     const thirdStep = () => (
         <div className={s.calibrationWrapper}>
             <h3 style={{ marginBottom: '100px' }}>{`Your accuracy measure is ${accuracy} % `}</h3>
+            <p>Recommended accuracy to continue testing is more then 70%</p>
             <div className={gs.flexWrapperRowCenter}>
                 <Button onClick={recalibrate}>Recalibrate</Button>
                 <Button

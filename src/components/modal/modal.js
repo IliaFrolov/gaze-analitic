@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Button from '../button/botton';
 import gs from './../../styles/global.module.css';
 import s from './modal.module.css';
+
 const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonLabel = 'OK' }) => {
     const onAction = (action) => {
         hide();
@@ -43,8 +44,11 @@ const Modal = ({ isShowing, hide, action, header, bodyText, bodyContent, buttonL
                           role="dialog"
                       >
                           <h1>{header}</h1>
-                          {bodyText && <p>{bodyText}</p>}
-                          {bodyContent}
+                          <div className={s.body}>
+                              {bodyText && <p>{bodyText}</p>}
+                              {bodyContent}
+                          </div>
+
                           <div className={classNames(s.buttonWrapper, gs.flexWrapperRowCenter)}>
                               {renderButton()}
                           </div>

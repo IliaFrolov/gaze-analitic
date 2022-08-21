@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Script from 'react-load-script';
 import useModal from '../hooks/useModal';
-import Calibration from './gazeCalibration';
+import Calibration from './../pages/calibrationPage';
 import Modal from './modal/modal';
 import Spinner from './spinner';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
         JSON.parse(localStorage.getItem(SAVED_USER_IS_CALIBRATED)),
     );
     const [webgazerInstance, setWebgazerInstance] = useState(null);
+    // const [webgazerIsReady, setWebgazerIsReady] = useState(false);
     const [error, setError] = useState(null);
     const { isShowing, toggle } = useModal();
     const navigate = useNavigate();
@@ -27,14 +28,9 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
         }
     }, [x, y, calibrated]);
 
-    // const Component = component;
-
-    useEffect(() => {
-        // console.log('useEffect', { sessionResult });
-    }, [sessionResult]);
-
     const handleScriptLoad = () => {
         setLoading(false);
+
         try {
             window.webgazer.setRegression('ridge');
             window.webgazer.showVideo(false);
@@ -63,7 +59,6 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
     const start = () => {
         console.log(window.webgazer);
         setSessionResult([]);
-        console.log('isReady', window.webgazer.isReady());
         if (window.webgazer.isReady()) {
             window.webgazer.resume();
         } else {

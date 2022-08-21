@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import SignInPage from './pages/signInPage';
+import SignInPage from './pages/signinPage/signInPage';
 import ResultsPage from './pages/resultsPage';
-import GazeCalibration from './components/gazeCalibration/gazeCalibration';
-import TestPage from './pages/testPage';
+import TestPage from './pages/testsPage/testsPage';
 import {
-    PATH_CALIBRATION_PAGE,
     PATH_HOME,
+    PATH_INSTRUCTIONS_PAGE,
     PATH_RESULTS_PAGE,
     PATH_SING_IN_PAGE,
+    PATH_TESTS_PAGE,
     SAVED_USER_KEY,
     SAVED_USER_NAME,
 } from './constants';
 
 import HeatmapViewer from './components/heatmapViewer';
+import InstructionPage from './pages/instructionPage';
+import WelcomePage from './pages/welcomePage';
 
 const generateSampleHeatMap = () => {
     const points = [];
@@ -54,10 +56,19 @@ const App = () => {
           <Link to={PATH_SING_IN_PAGE}>Login</Link>
         </ul> */}
                 <Routes>
-                    <Route path={PATH_CALIBRATION_PAGE} element={<GazeCalibration />} />
+                    {/* <Route path={PATH_CALIBRATION_PAGE} element={<GazeCalibration />} /> */}
                     <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />
+                    <Route path={PATH_HOME} element={<WelcomePage />} />
                     <Route
-                        path={PATH_HOME}
+                        path={PATH_INSTRUCTIONS_PAGE}
+                        element={
+                            <RequireAuth>
+                                <InstructionPage />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path={PATH_TESTS_PAGE}
                         element={
                             <RequireAuth>
                                 <TestPage />
@@ -86,7 +97,14 @@ const App = () => {
                     //     // '.95': 'white',
                     // },
                 }}
-                style={{ position: 'absolute', top: '0', left: '0', zIndex: '-1' }}
+                style={{
+                    width: '100vw',
+                    height: '100vh',
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    zIndex: '-1',
+                }}
                 id="backgroundHeatmap"
                 result={randomHeatmap}
             />

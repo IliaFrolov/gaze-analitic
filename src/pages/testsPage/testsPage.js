@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../components/modal/modal';
-import TestItem from '../components/testItem';
-import TestSwitcher from '../components/testSwitcher/testSwitcher';
-import { WebGazerLoader } from '../components/webGazerLoader';
+import Modal from '../../components/modal';
+import TestItem from '../../components/testItem';
+import TestSwitcher from '../../components/testSwitcher';
+import { WebGazerLoader } from '../../components/webGazerLoader';
 import {
     PATH_RESULTS_PAGE,
     SAVED_USER_IS_CALIBRATED,
     SAVED_USER_KEY,
     SAVED_USER_HAS_RESULT,
-} from '../constants';
-import { pushUserResult } from '../firebase/api';
-import useModal from '../hooks/useModal';
-import { Logout } from './signInPage';
-import tests from './../testScreens';
+} from '../../constants';
+import { pushUserResult } from '../../firebase/api';
+import useModal from '../../hooks/useModal';
+import Logout from './../../components/logout';
+import tests from '../../testScreens';
 // require('./../utils/resizeUtils');
 
 const TestPage = () => {
@@ -82,7 +82,7 @@ const TestPage = () => {
                 buttonLabel={['Logout', 'Results']}
                 hide={toggle}
                 header={'Thank you for passing all tests'}
-                bodyContent={'Now you can view your results or logout and try again'}
+                bodyText={'Now you can view your results or logout and try again'}
             />
         </>
     );

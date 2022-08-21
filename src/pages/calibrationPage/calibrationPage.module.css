@@ -18,10 +18,25 @@
     -moz-border-radius: 25px;
     border-radius: 25px;
     background-color: red;
-    opacity: 0.2;
+    /* opacity: 0.2; */
     border-color: black;
     border-style: solid;
     position: fixed;
+    z-index: 5;
+}
+
+.blueDot {
+    display: inline-block;
+    border-radius: 50%;
+    background: blue;
+    opacity: 0.7;
+    width: 10px;
+    height: 10px;
+}
+
+.btnText {
+    display: inline-block;
+    position: static;
 }
 
 .passed {

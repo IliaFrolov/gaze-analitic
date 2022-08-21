@@ -65,7 +65,7 @@ const TestItem = ({
                 action={startTest}
                 hide={toggleStartModal}
                 header={title}
-                bodyContent={startDescription}
+                bodyText={startDescription}
                 b
             />
             {testComponent}
@@ -74,7 +74,7 @@ const TestItem = ({
                 action={goNext}
                 hide={toggleEndModal}
                 header={title}
-                bodyContent={endDescription}
+                bodyText={endDescription}
                 buttonLabel={isLast ? 'Ok' : 'Next'}
             />
             {/* <button onClick={retry}>Retry</button> */}

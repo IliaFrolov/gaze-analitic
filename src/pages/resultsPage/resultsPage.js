@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import HeatmapViewer from '../components/heatmapViewer';
-import Spinner from '../components/spinner';
-import { SAVED_USER_KEY, SAVED_USER_NAME } from '../constants';
-import { getUserData } from '../firebase/api';
-import { tests } from '../pages/testPage';
-import { Logout } from './signInPage';
+import HeatmapViewer from './../../components/heatmapViewer';
+import Spinner from './../../components/spinner';
+import { SAVED_USER_KEY, SAVED_USER_NAME } from './../../constants';
+import { getUserData } from './../../firebase/api';
+import tests from './../../testScreens';
+import Logout from './../../components/logout';
 import { useNavigate } from 'react-router-dom';
 import s from './resultsPage.module.css';
-import gs from './../styles/global.module.css';
+import gs from './../../styles/global.module.css';
 import classNames from 'classnames';
-import Button from '../components/button/botton';
+import Button from './../../components/button';
 
 const ResultsPage = () => {
     const [isLoading, setLoading] = useState(true);

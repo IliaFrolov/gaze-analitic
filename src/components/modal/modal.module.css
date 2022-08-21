@@ -24,17 +24,20 @@
 .buttonWrapper {
     margin-top: 3rem;
 }
-
+.body {
+    overflow: auto;
+}
 .modal {
     width: 70vw;
-    height: 50vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
 }
 
 .modal h1 {
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
     text-align: center;
 }

@@ -108,9 +108,8 @@
     cursor: not-allowed;
     /* border-width: 3px; */
 }
-.buttonDisabled:hover,
-.buttonDisabled:active {
-    /* border-width: 3px !important; */
+.buttonDisabled:after {
+    border-width: 0 !important;
 }
 
 /* Pushed */
