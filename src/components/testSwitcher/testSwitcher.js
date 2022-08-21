@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TestItem from '../testItem';
 
-const TestSwitcher = ({ tests = [], stop, resume, processResult, finishTesting }) => {
+const TestSwitcher = ({ tests = [], start, stop, processResult, finishTesting }) => {
     const testAmount = tests.length;
     // const [currentTest, setCurrentTest] = useState(null);
     const [currentIdx, setCurrentIdx] = useState(0);
@@ -26,7 +26,7 @@ const TestSwitcher = ({ tests = [], stop, resume, processResult, finishTesting }
             {...tests[currentIdx]}
             goNext={goNext}
             stop={stop}
-            resume={resume}
+            start={start}
             processResult={processResult}
             isLast={isLast}
         />

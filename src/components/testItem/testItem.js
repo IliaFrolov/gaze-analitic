@@ -9,7 +9,7 @@ const TestItem = ({
     endDescription,
     time,
     stop,
-    resume,
+    start,
     testComponent,
     processResult,
     goNext,
@@ -24,7 +24,7 @@ const TestItem = ({
 
     const startTest = () => {
         setStarted(true);
-        resume();
+        start();
     };
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const TestItem = ({
             const screenSize = { height: window.innerHeight, width: window.innerWidth };
             setIsProcessed(true);
             processResult(id, screenSize);
-            stop();
+            stop(isLast);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isTimerFinished, processResult, isProcessed]);
@@ -59,7 +59,7 @@ const TestItem = ({
 
     // console.log('Timer', testTimer.current);
     return (
-        <div>
+        <>
             <Modal
                 isShowing={startModalShow}
                 action={startTest}
@@ -78,7 +78,7 @@ const TestItem = ({
                 buttonLabel={isLast ? 'Ok' : 'Next'}
             />
             {/* <button onClick={retry}>Retry</button> */}
-        </div>
+        </>
     );
 };
 

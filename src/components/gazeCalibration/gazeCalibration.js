@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
-import gs from './../../styles/global.module.css';
-import s from './gazeCalibration.module.css';
 import { calculatePrecision } from '../../utils/precisionUtils';
 import Modal from '../modal/modal';
 import useModal from '../../hooks/useModal';
-import './style.css';
 import Button from '../button/botton';
+import gs from './../../styles/global.module.css';
+import s from './gazeCalibration.module.css';
+import './style.css';
 
-const Calibration = ({ onSuccess, start, stop, resume }) => {
+const Calibration = ({ onSuccess, start, stop }) => {
     const defaultCalibrationButtons = {
         id1: { pressedTimes: 0, passed: false },
         id2: { pressedTimes: 0, passed: false },
@@ -28,15 +28,6 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
 
     const { isShowing: isShowing1, toggle: toggle1 } = useModal(true);
     const { isShowing: isShowing2, toggle: toggle2 } = useModal(true);
-
-    useEffect(() => {
-        window.webgazer.showVideo(true);
-        // window.webgazer.params.showGazeDot(true);
-        return () => {
-            window.webgazer.showVideo(false);
-            // window.webgazer.params.showGazeDot(false);
-        };
-    });
 
     const store_points_variable = () => {
         window.webgazer.params.storingPoints = true;
@@ -76,8 +67,8 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
     }, [step, idReadyToMeasure]);
 
     const precisionMeasurement = () => {
-        resume();
-        // window.webgazer.removeMouseEventListeners()
+        start();
+        // window.webgazer.removeMouseEventListeners();
         store_points_variable();
         sleep(5000).then(() => {
             stop_storing_points_variable(); // stop storing the prediction points
@@ -104,6 +95,7 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
         setAccuracy(0);
         setStep('1');
     };
+
     const renderButtons = () => {
         return Object.keys(calibrationPoints).map((btnInx) => {
             const btn = calibrationPoints[btnInx];
@@ -131,7 +123,10 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
                 bodyText="blabbla blaala"
                 isShowing={isShowing1}
                 hide={toggle1}
-                action={start}
+                action={() => {
+                    start();
+                    window.webgazer.showVideo(true);
+                }}
             />
         </div>
     );
@@ -154,7 +149,13 @@ const Calibration = ({ onSuccess, start, stop, resume }) => {
             <h3 style={{ marginBottom: '100px' }}>{`Your accuracy measure is ${accuracy} % `}</h3>
             <div className={gs.flexWrapperRowCenter}>
                 <Button onClick={recalibrate}>Recalibrate</Button>
-                <Button primary onClick={() => onSuccess(true)}>
+                <Button
+                    primary
+                    onClick={() => {
+                        onSuccess(true);
+                        window.webgazer.showVideo(false);
+                    }}
+                >
                     Go to test
                 </Button>
             </div>

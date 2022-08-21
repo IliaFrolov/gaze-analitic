@@ -84,29 +84,6 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
         }
     };
 
-    const resume = () => {
-        start();
-        // setSessionResult([]);
-        // window.webgazer.resume();
-    };
-
-    // const childrenWithProps = React.Children.map(children, (child) => {
-    //     if (React.isValidElement(child)) {
-    //         // console.log('childrenWithProps', sessionResult);
-    //         return React.cloneElement(child, { start, stop, resume, sessionResult });
-    //     }
-    //     console.log('isValidElement');
-    //     return child;
-    // });
-
-    // const childrenWithProps = useMemo(() => React.Children.map(children, child => {
-    //     if (React.isValidElement(child)) {
-    //         return React.cloneElement(child, { start, stop, resume, sessionResult });
-    //     }
-    //     console.log('isValidElement');
-    //     return child;
-    // }), [sessionResult, webgazerInstance]);
-
     const onSuccessCalibration = () => {
         setCalibrated(true);
         setUserIsCalibrated(true);
@@ -133,15 +110,10 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
             {isLoading ? (
                 <Spinner />
             ) : !calibrated ? (
-                <Calibration
-                    start={start}
-                    stop={stop}
-                    resume={resume}
-                    onSuccess={onSuccessCalibration}
-                />
+                <Calibration start={start} stop={stop} onSuccess={onSuccessCalibration} />
             ) : // childrenWithProps
             children ? (
-                children(sessionResult, { stop, resume, start })
+                children(sessionResult, { stop, start })
             ) : null}
             <canvas
                 id="plotting_canvas"
