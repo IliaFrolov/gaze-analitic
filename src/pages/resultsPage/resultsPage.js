@@ -11,6 +11,7 @@ import gs from './../../styles/global.module.css';
 import classNames from 'classnames';
 import Button from './../../components/button';
 import { useTranslation } from 'react-i18next';
+import Scrollbar from '../../components/scrollbar';
 
 const ResultsPage = () => {
     const [isLoading, setLoading] = useState(true);
@@ -64,20 +65,22 @@ const ResultsPage = () => {
                 {result && (
                     <div className={s.accordion}>
                         <div className={s.buttonsWrapper}>
-                            <div className={s.buttons}>
-                                {idArr.map((id) => (
-                                    <Button
-                                        puched={currentResultId === id}
-                                        key={id}
-                                        onClick={() => setCurrentResultId(id)}
-                                    >
-                                        {result[id].testName}
-                                    </Button>
-                                ))}
-                            </div>
+                            <Scrollbar>
+                                <div className={s.buttons}>
+                                    {idArr.map((id) => (
+                                        <Button
+                                            puched={currentResultId === id}
+                                            key={id}
+                                            onClick={() => setCurrentResultId(id)}
+                                        >
+                                            {result[id].testName}
+                                        </Button>
+                                    ))}
+                                </div>
+                            </Scrollbar>
                         </div>
                         {currentResultId && (
-                            <div className={s.content}>
+                            <Scrollbar className={s.content}>
                                 <div
                                     style={{
                                         transformOrigin: 'top left',
@@ -107,7 +110,7 @@ const ResultsPage = () => {
                                         }}
                                     />
                                 </div>
-                            </div>
+                            </Scrollbar>
                         )}
                     </div>
                 )}

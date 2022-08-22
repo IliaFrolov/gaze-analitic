@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import Button from '../button/botton';
+import Scrollbar from '../scrollbar';
 import gs from './../../styles/global.module.css';
 import s from './modal.module.css';
 
@@ -58,10 +59,10 @@ const Modal = ({
                               <h1>{header}</h1>
                               {headerInfo}
                           </div>
-                          <div className={s.body}>
+                          <Scrollbar className={s.body}>
                               {bodyText && <p>{bodyText}</p>}
                               {bodyContent}
-                          </div>
+                          </Scrollbar>
 
                           <div className={classNames(s.buttonWrapper, gs.flexWrapperRowCenter)}>
                               {renderButton()}

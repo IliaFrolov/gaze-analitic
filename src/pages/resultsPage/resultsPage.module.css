@@ -30,13 +30,13 @@
 .buttonsWrapper {
     width: 30%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .buttons {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
-    padding-right: 17px;
+    /* overflow-y: scroll; */
+    /* padding-right: 17px; */
     box-sizing: content-box;
     display: flex;
     flex-direction: column;

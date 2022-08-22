@@ -8,6 +8,7 @@ import s from './welcomePage.module.css';
 import { useTranslation } from 'react-i18next';
 import LangSwitcher from '../../components/langSwitcher';
 import Button from '../../components/button';
+import Scrollbar from '../../components/scrollbar';
 
 const WelcomePage = () => {
     const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
@@ -30,13 +31,13 @@ const WelcomePage = () => {
                     <h1>{t('welcome-header')}✨</h1>
                     <LangSwitcher className={s.lang} />
                 </div>
-                <div className={s.text}>
+                <Scrollbar>
                     <p>{t('welcome-body-p1')}</p>
                     <p>
                         {t('welcome-body-p2')}
                         <Button type="link">{t('welcome-body-btn-label')}</Button>.
                     </p>
-                </div>
+                </Scrollbar>
                 <SigninForm nextPath={PATH_INSTRUCTIONS_PAGE} className={s.form} />
             </div>
         </div>
