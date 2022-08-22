@@ -16,7 +16,9 @@ const SignInForm = ({ className, nextPath }) => {
     const [name, setName] = useState('');
     const [isValid, setValid] = useState(false);
     const [isAccepted, setIsAccepted] = useState(false);
-    const [isBlured, setIsBlured] = useState(false);
+    const [isNameBlured, setNameIsBlured] = useState(false);
+    const [isTacBlured, setTacIsBlured] = useState(false);
+
     const { isShowing, toggle } = useModal();
     const { t } = useTranslation();
 
@@ -24,38 +26,53 @@ const SignInForm = ({ className, nextPath }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isBlured) handleValidation();
+        if (isNameBlured) handleValidationName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, isAccepted, isBlured]);
+    }, [name, isNameBlured]);
 
-    const handleValidation = () => {
-        setError(null);
-        let errors = {};
+    useEffect(() => {
+        if (isTacBlured) handleValidationTac();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAccepted, isTacBlured]);
+
+    const handleValidationName = () => {
+        setError((prev) => ({ ...prev, name: null }));
+        let nameError = null;
         let formIsValid = true;
         setValid(formIsValid);
         if (name.length < 3) {
-            errors.name = t('signin-error-short');
+            nameError = t('signin-error-short');
             formIsValid = false;
         }
         if (name.length > 20) {
-            errors.name = t('signin-error-long');
+            nameError = t('signin-error-long');
             formIsValid = false;
         }
+        setError((prev) => ({ ...prev, name: nameError }));
+        setValid(formIsValid);
+        return formIsValid;
+    };
+
+    const handleValidationTac = () => {
+        setError((prev) => ({ ...prev, tac: null }));
+        let tocError = null;
+        let formIsValid = true;
+        setValid(formIsValid);
         if (!isAccepted) {
-            errors.tac = t('signin-error-toc');
+            tocError = t('signin-error-toc');
             formIsValid = false;
         }
-        setError(errors);
+        setError((prev) => ({ ...prev, tac: tocError }));
         setValid(formIsValid);
         return formIsValid;
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (handleValidation()) {
+        if (handleValidationTac() && handleValidationName()) {
             localStorage.setItem(SAVED_USER_NAME, JSON.stringify(name));
 
-            createUser(name, (key) => {
+            await createUser(name, (key) => {
                 localStorage.setItem(SAVED_USER_KEY, JSON.stringify(key));
                 nextPath && navigate(nextPath);
             });
@@ -92,19 +109,21 @@ const SignInForm = ({ className, nextPath }) => {
                         value={name}
                         onChange={(e) => {
                             setName(e.target.value);
-                            // handleValidation();
+                            // handleValidationName();
                         }}
-                        onBlur={() => setIsBlured(true)}
+                        onBlur={() => setNameIsBlured(true)}
                         placeholder={t('signin-nickname')}
                         aria-label="Nick name"
                     />
-                    {error.name && <p className={s.error}>{error.name}</p>}
+                    {error?.name && <p className={s.error}>{error.name}</p>}
                 </div>
                 <div className={s.inputLine}>
                     <Checkbox
                         checked={isAccepted}
+                        onBlur={() => setTacIsBlured(true)}
                         onChange={() => {
                             setIsAccepted((prev) => !prev);
+                            // handleValidationTac();
                         }}
                     >
                         <span>
@@ -120,7 +139,7 @@ const SignInForm = ({ className, nextPath }) => {
                             </Button>
                         </span>
                     </Checkbox>
-                    {error.tac && <p className={s.error}>{error.tac}</p>}
+                    {error?.tac && <p className={s.error}>{error.tac}</p>}
                 </div>
 
                 <div className={s.inputLine}>
