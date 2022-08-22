@@ -2,28 +2,33 @@
     "1test-title": "Test 1 name",
     "1test-start-description": "test 1 explanation",
     "1test-end-description": "test 1 thanks description",
-
     "welcome-header": "Welcome ✨",
-    "welcome-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, nulla at facilisis porttitor, odio orci sodales sem, faucibus scelerisque    libero urna sit amet erat. Duis ipsum erat, luctus id ultricies in, sodales sed erat. Etiam vitae nunc sem. Donec in metus odio. Morbi luctus ligula    elementum odio dignissim, eget vehicula lacus posuere. In sed sem tincidunt    magna mattis rutrum. Phasellus suscipit a mauris iaculis vestibulum. Vivamus    id placerat justo. Praesent ut egestas risus, eu eleifend odio. Cras    viverra, erat id porttitor sollicitudin, ipsum mauris fringilla odio, sit    amet varius purus sapien id erat. Vestibulum nec lorem vitae ipsum posuere    posuere. Pellentesque habitant morbi tristique senectus et netus et    malesuada fames ac turpis egestas. Phasellus aliquam, lorem sit amet    ullamcorper interdum, tortor velit euismod odio, at tempus dolor erat    consequat purus. Duis vel sapien nulla. Phasellus orci dui, porta id    vulputate vel, congue eu mi.",
+    "welcome-body-p1": "My name is Ilia and this website is a part of my master's diploma project. The purpose of this web site is to collect and further analysis eye tracking data with the help of a web camera while examinee look at different pictures or web pages and interact with them.",
+    "welcome-body-p2": "The system is not collecting any of your personal data, more about it and principles of system operation in terms and condition section.",
     "signin-error-short": "The name is too short",
     "signin-error-long": "The name is too long",
     "signin-error-toc": "Needs accept terms and conditions",
-    "signin-nickname": "Nick name",
+    "signin-nickname": "YOUR NICK",
     "signin-checkbox": "I'm accept",
     "signin-toc-link": "terms and conditions",
     "signin-submit-btn-label": "Start",
-
-    "toc-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim, nulla at    facilisis porttitor, odio orci sodales sem, faucibus scelerisque libero urna sit    amet erat. Duis ipsum erat, luctus id ultricies in, sodales sed erat. Etiam vitae    nunc sem. Donec in metus odio. Morbi luctus ligula elementum odio dignissim, eget    vehicula lacus posuere. In sed sem tincidunt magna mattis rutrum. Phasellus suscipit    a mauris iaculis vestibulum. Vivamus id placerat justo. Praesent ut egestas risus,    eu eleifend odio. Cras viverra, erat id porttitor sollicitudin, ipsum mauris    fringilla odio, sit amet varius purus sapien id erat. Vestibulum nec lorem vitae    ipsum posuere posuere. Pellentesque habitant morbi tristique senectus et netus et    malesuada fames ac turpis egestas. Phasellus aliquam, lorem sit amet ullamcorper    interdum, tortor velit euismod odio, at tempus dolor erat consequat purus. Duis vel    sapien nulla. Phasellus orci dui, porta id vulputate vel, congue eu mi.",
-    "toc-project-link": "Link on project github repo",
-    "toc-lib-link": "Link on repo of webgazer",
+    "toc-body-p1": "This web application is not collecting any of your personal data. You can use your nick name instead real name. Web camera is not save or sent video or audio but only using for recognition of eyes and prediction of gaze location on screen surface.",
+    "toc-body-p2": "For implementing this functionality was used Webgazer library.",
+    "toc-project-link": "Link on project sourse",
+    "toc-lib-git-link": "Link on Webgazer source repository",
+    "toc-lib-web-link": "Link on Webgazer website",
     "toc-lib-header": "Terms and conditions",
     "toc-lib-submit-btn-label": "Accept",
-
     "instruction-title": "Instruction",
-    "instruction-body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim",
+    "instruction-p1": "As examinee you will viewed and interactive with several web pages and system will collect position of your gaze on the screen.",
+    "instruction-p2": "During testing is preferably to do not move a lot. So please seat comfortable in front of your laptop.",
+    "instruction-p3": "The examination will contain several parts:",
+    "instruction-li1": "Calibration - process what help setup the system for your face;",
+    "instruction-li2": "Precision measurement - will calculate precision of system after previous calibration;",
+    "instruction-li3": "Set of tests - tests itself. Before each of them you will see instruction  with explanation;",
+    "instruction-p4": "After passing all test you be able to view map of your gaze for each test.",
     "instruction-to-tests-label": "Start testing",
     "instruction-calibration-label": "Go to calibration",
-
     "calibration-title": "Calibration",
     "calibration-instruction-1": "Please seet in from of your webcamera;",
     "calibration-instruction-2": "Allow use your camera if you will see corresponding dialog;",
@@ -34,7 +39,6 @@
     "calibration-instruction-5-2": " 5 times utill it beacome yellow ",
     "calibration-instruction-6": "Please look on the button when you click it;",
     "calibration-start-label": "Start calibraton",
-
     "measurement-title": "Precision measurement",
     "measurement-instruction-1": "Please do not move your mouse;",
     "measurement-instruction-2-1": "To measure accuracy of calibration look on the button ",
@@ -44,21 +48,16 @@
     "measurement-start-label": "Start",
     "measurement-recalibrate-label": "Recalibrate",
     "measurement-continue-label": "Go to test",
-
     "results-title": "Results of ",
     "results-logout-label": "Logout",
-
     "thanks-title": "Thank you for passing all tests",
     "thanks-text": "Now you can view your results or logout and try again",
     "thanks-logout-label": "Logout",
     "thanks-results-label": "Results",
-
     "test-start-label": "Start",
     "test-next-label": "Next",
     "test-last-label": "Ok",
-
     "error-title": "Error is happened",
     "error-btn-label": "Start from scratch",
-
     "ok-label": "ok"
 }

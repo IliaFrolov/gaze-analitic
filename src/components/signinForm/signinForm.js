@@ -63,15 +63,21 @@ const SignInForm = ({ className, nextPath }) => {
     };
     const tacContent = (
         <div>
-            <p>{t('toc-body')}</p>
+            <p>{t('toc-body-p1')}</p>
+            <p>{t('toc-body-p2')}</p>
             <p>
-                <a target="_blank" href="github.com">
-                    {t('toc-project-link')}
+                <a target="_blank" rel="noreferrer" href="https://webgazer.cs.brown.edu/">
+                    {t('toc-lib-web-link')}
                 </a>
             </p>
             <p>
-                <a target="_blank" href="github.com">
-                    {t('toc-lib-link')}
+                <a target="_blank" rel="noreferrer" href="https://github.com/brownhci/WebGazer">
+                    {t('toc-lib-git-link')}
+                </a>
+            </p>
+            <p>
+                <a target="_blank" rel="noreferrer" href="github.com">
+                    {t('toc-project-link')}
                 </a>
             </p>
         </div>
@@ -118,9 +124,7 @@ const SignInForm = ({ className, nextPath }) => {
                 </div>
 
                 <div className={s.inputLine}>
-                    <Button disabled={!isValid} onClick={onSubmit}>
-                        {t('signin-submit-btn-label')}
-                    </Button>
+                    <Button onClick={onSubmit}>{t('signin-submit-btn-label')}</Button>
                 </div>
             </form>
             <Modal

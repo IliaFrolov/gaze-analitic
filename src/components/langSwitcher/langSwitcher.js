@@ -27,7 +27,7 @@ const LangSwitcher = ({ className }) => {
                 puched={currentLang === 'ua'}
                 onClick={() => changeLanguageHandler('ua')}
             >
-                UA
+                УКР
             </Button>
         </div>
     );

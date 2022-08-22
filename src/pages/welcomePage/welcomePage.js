@@ -30,7 +30,8 @@ const WelcomePage = () => {
                     <LangSwitcher className={s.lang} />
                 </div>
                 <div className={s.text}>
-                    <span>{t('welcome-body')}</span>
+                    <p>{t('welcome-body-p1')}</p>
+                    <p>{t('welcome-body-p2')}</p>
                 </div>
                 <SigninForm nextPath={PATH_INSTRUCTIONS_PAGE} className={s.form} />
             </div>

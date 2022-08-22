@@ -17,16 +17,21 @@ const InstructionPage = () => {
                 {/* <div className={s.boxInner}> */}
                 <h1>{t('instruction-title')}</h1>
                 <div className={s.text}>
-                    <span>{t('instruction-body')}</span>
+                    <p>{t('instruction-p1')}</p>
+                    <p>{t('instruction-p2')}</p>
+                    <p>{t('instruction-p3')}</p>
+                    <ul>
+                        <li>{t('instruction-li1')}</li>
+                        <li>{t('instruction-li2')}</li>
+                        <li>{t('instruction-li3')}</li>
+                    </ul>
+                    <p>{t('instruction-p4')}</p>
                 </div>
-                {/* </div> */}
-                {/* <div className={s.boxInner}> */}
                 <Button onClick={() => navigate(PATH_TESTS_PAGE)}>
                     {isCalibrated
                         ? t('instruction-to-tests-label')
                         : t('instruction-calibration-label')}
                 </Button>
-                {/* </div> */}
             </div>
         </div>
     );
