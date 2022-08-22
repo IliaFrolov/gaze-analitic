@@ -197,7 +197,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
             <div className={gs.flexWrapperRowCenter}>
                 <Button onClick={recalibrate}>{t('measurement-recalibrate-label')}</Button>
                 <Button
-                    primary
+                    type="primary"
                     onClick={() => {
                         onSuccess(true);
                     }}

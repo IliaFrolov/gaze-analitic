@@ -28,7 +28,7 @@ const Modal = ({
             return buttonLabel.map((lbl, idx, arr) => (
                 <Button
                     key={lbl + idx}
-                    type={idx === arr.length - 1 ?? 'primary'}
+                    type={idx === arr.length - 1 && 'primary'}
                     data-dismiss="modal"
                     onClick={() => onAction(action[idx])}
                 >

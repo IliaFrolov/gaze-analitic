@@ -116,7 +116,9 @@ const SignInForm = ({ className, nextPath }) => {
                 </div>
 
                 <div className={s.inputLine}>
-                    <Button onClick={onSubmit}>{t('signin-submit-btn-label')}</Button>
+                    <Button type="primary" onClick={onSubmit}>
+                        {t('signin-submit-btn-label')}
+                    </Button>
                 </div>
             </form>
             <Modal
