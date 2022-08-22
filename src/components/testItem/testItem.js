@@ -61,7 +61,12 @@ const TestItem = ({
     }, []);
 
     const headerInfo = <span>{`${number}/${total}`}</span>;
-
+    const startModalBody = (
+        <div>
+            <p>{startDescription}</p>
+            {time > 0 && <p>{`${t('test-duration')}: ${time / 1000}${t('test-sec')}`}</p>}
+        </div>
+    );
     return (
         <>
             <Modal
@@ -69,7 +74,7 @@ const TestItem = ({
                 action={startTest}
                 hide={toggleStartModal}
                 header={title}
-                bodyText={startDescription}
+                bodyContent={startModalBody}
                 buttonLabel={t('test-start-label')}
                 headerInfo={headerInfo}
             />

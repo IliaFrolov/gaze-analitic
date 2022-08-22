@@ -29,6 +29,20 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
         }
     }, [x, y, calibrated]);
 
+    // useEffect(() => {
+    //     if (!isLoading) setWebgazerIsReady(window.webgazer.hidePredictionPoints());
+    // }, [isLoading]);
+
+    // useEffect(() => {
+    //     console.log('SAVED_USER_IS_CALIBRATED', localStorage.getItem(SAVED_USER_IS_CALIBRATED));
+    //     if (
+    //         !isLoading &&
+    //         webgazerIsReady &&
+    //         JSON.parse(localStorage.getItem(SAVED_USER_IS_CALIBRATED))
+    //     )
+    //         window.webgazer.hidePredictionPoints();
+    // }, [isLoading, webgazerIsReady]);
+
     const handleScriptLoad = () => {
         setLoading(false);
 

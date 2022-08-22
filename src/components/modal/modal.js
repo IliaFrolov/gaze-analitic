@@ -23,11 +23,11 @@ const Modal = ({
     };
 
     const renderButton = () => {
-        if (Array.isArray(action) || Array.isArray(buttonLabel)) {
+        if (Array.isArray(action) && Array.isArray(buttonLabel)) {
             return buttonLabel.map((lbl, idx, arr) => (
                 <Button
                     key={lbl + idx}
-                    type={idx === arr.length - 1 && 'primary'}
+                    type={idx === arr.length - 1 ?? 'primary'}
                     data-dismiss="modal"
                     onClick={() => onAction(action[idx])}
                 >

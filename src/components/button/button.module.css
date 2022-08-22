@@ -54,7 +54,7 @@
 }
 
 /*Primary*/
-.buttonPrimary {
+.primary {
     /* background: black !important; */
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9) 50%, black 50%, black);
     background-size: 200% 200%;
@@ -62,7 +62,7 @@
     color: white !important;
     transition: background-position 0.5s ease-in-out;
 }
-.buttonPrimary:before {
+.primary:before {
     content: '';
     display: block;
     position: absolute;
@@ -77,28 +77,28 @@
     transition: 0.5s ease-in-out;
 }
 
-.buttonPrimary:hover {
+.primary:hover {
     background-position: 50% 80%;
 }
-.buttonPrimary:after {
+.primary:after {
     border-width: 1px !important;
     border-color: rgba(255, 255, 255, 0.8) black black rgba(255, 255, 255, 0.8) !important;
 }
-.buttonPrimary:hover::before {
+.primary:hover::before {
     transform: translateX(500px) skewX(45deg);
     opacity: 0.6;
 }
-.buttonPrimary:hover:after {
+.primary:hover:after {
     border-color: black !important;
 }
-.buttonPrimary:active {
+.primary:active {
     background-position: 50% 100%;
 }
-.buttonPrimary:active::before {
+.primary:active::before {
     transform: translateX(-500px);
     opacity: 0.6;
 }
-.buttonPrimary:active:after {
+.primary:active:after {
     border-color: black rgba(255, 255, 255, 0.8) rgba(255, 255, 255, 0.8) black !important;
 }
 
@@ -122,7 +122,7 @@
 
 /*Link*/
 
-.buttonLink {
+.link {
     font-size: 1em;
     display: inline;
     text-transform: none;
@@ -133,11 +133,11 @@
     backdrop-filter: none;
 }
 
-.buttonLink:after {
+.link:after {
     display: none;
 }
 
-.buttonLink:hover {
+.link:hover {
     text-decoration: none;
     opacity: 0.7;
     backdrop-filter: none;

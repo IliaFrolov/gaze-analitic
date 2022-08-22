@@ -12,8 +12,7 @@ const Button = ({ children, type, puched, disabled, size, ...restProps }) => {
                 s[size],
                 disabled && s.buttonDisabled,
                 puched && s.buttonPushed,
-                type === 'primary' && s.buttonPrimary,
-                type === 'link' && s.buttonLink,
+                s[type],
             )}
         >
             {children}

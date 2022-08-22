@@ -3,7 +3,7 @@ import HeatmapViewer from './../../components/heatmapViewer';
 import Spinner from './../../components/spinner';
 import { SAVED_USER_KEY, SAVED_USER_NAME } from './../../constants';
 import { getUserData } from './../../firebase/api';
-import tests from './../../testScreens';
+import genTests from './../../testScreens/testsCopm';
 import Logout from './../../components/logout';
 import { useNavigate } from 'react-router-dom';
 import s from './resultsPage.module.css';
@@ -44,6 +44,8 @@ const ResultsPage = () => {
             // );
         }
     }, [currentResultId, result]);
+
+    const tests = genTests();
 
     if (isLoading) return <Spinner />;
     return (

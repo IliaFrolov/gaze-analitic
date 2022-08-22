@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import s from './testScreen.module.css';
+import gs from './../styles/global.module.css';
+import Button from '../components/button';
 
 const Tests = () => {
     const { t } = useTranslation();
@@ -12,30 +14,26 @@ const Tests = () => {
             endDescription: t('1test-end-description'),
             time: 5000,
             testComponent: (
-                <div className={s.pageWarapper}>
-                    <p>Some test text</p>
-                    <button>Button for test</button>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    className={s.pageWarapper}
+                >
+                    <div className={gs.flexWrapperRowCenter}>
+                        <Button style={{ background: 'red' }}>不</Button>
+                        <Button style={{ background: 'green' }}>是的</Button>
+                    </div>
                 </div>
             ),
         },
         {
             id: 'testId2',
-            title: 'Test 2',
-            startDescription: 'what needs to do second time ... ',
-            endDescription: 'Thanks for compleating test 2',
-            time: 5000,
-            testComponent: (
-                <div className={s.pageWarapper}>
-                    <p>Some test text</p>
-                    <button>Button for test</button>
-                </div>
-            ),
-        },
-        {
-            id: 'testId3',
-            title: 'Test 3',
-            startDescription: 'what needs to do second time ... ',
-            endDescription: 'Thanks for compleating test 3',
+            title: t('2test-title'),
+            startDescription: t('2test-start-description'),
+            endDescription: t('2test-end-description'),
             time: 5000,
             testComponent: (
                 <div
@@ -46,8 +44,10 @@ const Tests = () => {
                     }}
                     className={s.pageWarapper}
                 >
-                    <p>Some test text</p>
-                    <button>Button for test</button>
+                    <div className={gs.flexWrapperRowCenter}>
+                        <Button style={{ background: 'red' }}>不⛔</Button>
+                        <Button style={{ background: 'green' }}>是的👍</Button>
+                    </div>
                 </div>
             ),
         },
