@@ -21,4 +21,9 @@
 
 .input:checked ~ .checkbox {
     background: black;
+    background-clip: content-box;
+}
+
+.input:focus ~ .checkbox {
+    border-style: dashed;
 }

@@ -107,18 +107,10 @@ const SignInForm = ({ className, nextPath }) => {
                             setIsAccepted((prev) => !prev);
                         }}
                     >
-                        {t('signin-checkbox')}
-                        {'  '}
-                        <a
-                            style={{ display: 'contents' }}
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                toggle();
-                            }}
-                        >
-                            {t('signin-toc-link')}
-                        </a>
+                        <span>
+                            {t('signin-checkbox')}
+                            <Button type="link">{t('signin-toc-link')}</Button>
+                        </span>
                     </Checkbox>
                     {error.tac && <p className={s.error}>{error.tac}</p>}
                 </div>

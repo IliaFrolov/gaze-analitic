@@ -19,10 +19,12 @@ const LangSwitcher = ({ className }) => {
                 size="sm"
                 puched={currentLang === 'en'}
                 onClick={() => changeLanguageHandler('en')}
+                tabIndex={1}
             >
                 EN
             </Button>
             <Button
+                tabIndex={2}
                 size="sm"
                 puched={currentLang === 'ua'}
                 onClick={() => changeLanguageHandler('ua')}

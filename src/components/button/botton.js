@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import s from './button.module.css';
 
-const Button = ({ children, primary, puched, disabled, size, ...restProps }) => {
+const Button = ({ children, type, puched, disabled, size, ...restProps }) => {
     return (
         <button
             {...restProps}
@@ -12,7 +12,8 @@ const Button = ({ children, primary, puched, disabled, size, ...restProps }) => 
                 s[size],
                 disabled && s.buttonDisabled,
                 puched && s.buttonPushed,
-                primary && s.buttonPrimary,
+                type === 'primary' && s.buttonPrimary,
+                type === 'link' && s.buttonLink,
             )}
         >
             {children}

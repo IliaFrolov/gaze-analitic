@@ -7,6 +7,7 @@ import gs from './../../styles/global.module.css';
 import s from './welcomePage.module.css';
 import { useTranslation } from 'react-i18next';
 import LangSwitcher from '../../components/langSwitcher';
+import Button from '../../components/button';
 
 const WelcomePage = () => {
     const savedName = JSON.parse(localStorage.getItem(SAVED_USER_NAME));
@@ -26,12 +27,15 @@ const WelcomePage = () => {
         <div className={gs.flexFullScreenCenterCenter}>
             <div className={classNames(gs.box, s.box)}>
                 <div className={s.header}>
-                    <h1>{t('welcome-header')}</h1>
+                    <h1>{t('welcome-header')}✨</h1>
                     <LangSwitcher className={s.lang} />
                 </div>
                 <div className={s.text}>
                     <p>{t('welcome-body-p1')}</p>
-                    <p>{t('welcome-body-p2')}</p>
+                    <p>
+                        {t('welcome-body-p2')}
+                        <Button type="link">{t('welcome-body-btn-label')}</Button>.
+                    </p>
                 </div>
                 <SigninForm nextPath={PATH_INSTRUCTIONS_PAGE} className={s.form} />
             </div>

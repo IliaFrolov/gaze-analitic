@@ -34,6 +34,11 @@
     text-align: center;
 }
 
+.input:focus {
+    border-style: dashed;
+    outline: none;
+}
+
 .input:focus-visible {
     border-radius: 0;
 }

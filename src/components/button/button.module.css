@@ -39,19 +39,14 @@
 }
 
 .button:hover {
-    /* background: rgba(255, 255, 255, 0.8); */
     backdrop-filter: blur(6px);
-    /* border-width: 3px; */
-    /* margin-right: 2px; */
-    /* box-shadow: 0 0 0px 0px rgba(0, 0, 0, 1); */
+}
+.button:focus {
+    border-style: dashed;
+    outline: none;
 }
 .button:hover:after {
     border-width: 0;
-}
-
-.button:active {
-    /* border-width: 5px 3px 3px 5px; */
-    /* box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1); */
 }
 
 .button:active:after {
@@ -123,4 +118,27 @@
     color: white !important;
     border-width: 5px 3px 3px 5px !important;
     /* box-shadow: inset 1px 1px 0px 0px rgba(255, 255, 255, 1); */
+}
+
+/*Link*/
+
+.buttonLink {
+    font-size: 1em;
+    display: inline;
+    text-transform: none;
+    text-decoration: underline;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+}
+
+.buttonLink:after {
+    display: none;
+}
+
+.buttonLink:hover {
+    text-decoration: none;
+    opacity: 0.7;
+    backdrop-filter: none;
 }
