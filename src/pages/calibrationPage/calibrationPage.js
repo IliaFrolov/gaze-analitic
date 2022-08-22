@@ -64,6 +64,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
     useEffect(() => {
         if (idReadyToMeasure) {
             window.webgazer.showVideo(false);
+
             stop();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,6 +82,7 @@ const Calibration = ({ onSuccess, start, stop }) => {
             stop();
             setAccuracy(precision_measurement);
             setStep('3');
+            window.webgazer.hidePredictionPoints();
         });
     };
 
