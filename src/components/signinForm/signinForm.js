@@ -109,7 +109,15 @@ const SignInForm = ({ className, nextPath }) => {
                     >
                         <span>
                             {t('signin-checkbox')}
-                            <Button type="link">{t('signin-toc-link')}</Button>
+                            <Button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    toggle();
+                                }}
+                                type="link"
+                            >
+                                {t('signin-toc-link')}
+                            </Button>
                         </span>
                     </Checkbox>
                     {error.tac && <p className={s.error}>{error.tac}</p>}
