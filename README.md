@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Gaze analitic
+
+Diploma project of analysis of UI with help of gaze tracking
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
