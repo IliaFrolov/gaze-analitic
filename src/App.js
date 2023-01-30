@@ -12,30 +12,10 @@ import {
     SAVED_USER_KEY,
     SAVED_USER_NAME,
 } from './constants';
-
 import HeatmapViewer from './components/heatmapViewer';
 import InstructionPage from './pages/instructionPage';
 import WelcomePage from './pages/welcomePage';
-
-const generateSampleHeatMap = () => {
-    const points = [];
-    let max = 0;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    let len = 500;
-
-    while (len--) {
-        const val = Math.floor(Math.random() * 100);
-        max = Math.max(max, val);
-        const point = {
-            x: Math.floor(Math.random() * width),
-            y: Math.floor(Math.random() * height),
-            value: val,
-        };
-        points.push(point);
-    }
-    return points;
-};
+import generateSampleHeatMap from './utils/generateBg';
 
 const App = () => {
     const [randomHeatmap, setRandomHeatmap] = useState([]);
@@ -43,11 +23,11 @@ const App = () => {
     useEffect(() => {
         setRandomHeatmap(generateSampleHeatMap());
     }, []);
+
     return (
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    {/* <Route path={PATH_CALIBRATION_PAGE} element={<GazeCalibration />} /> */}
                     <Route path={PATH_SING_IN_PAGE} element={<SignInPage />} />
                     <Route path={PATH_HOME} element={<WelcomePage />} />
                     <Route
@@ -82,11 +62,6 @@ const App = () => {
                     maxOpacity: 0.9,
                     minOpacity: 0,
                     blur: 1,
-                    // gradient: {
-                    //     // '.5': 'blue',
-                    //     // '.8': 'red',
-                    //     // '.95': 'white',
-                    // },
                 }}
                 style={{
                     width: '100vw',

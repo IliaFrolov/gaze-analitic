@@ -56,8 +56,12 @@ export const WebGazerLoader = ({ children, setUserIsCalibrated }) => {
                     if (data == null) {
                         return;
                     }
+                    console.log({ data });
+
+                    const scrollTopDistance = document.getElementsByClassName('App')[0]?.scrollTop;
+                    console.log({ scrollTopDistance });
                     setX(data.x);
-                    setY(data.y);
+                    setY(scrollTopDistance ? data.y + scrollTopDistance : data.y);
                 }),
             );
         } catch (e) {

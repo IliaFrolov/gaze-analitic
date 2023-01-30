@@ -13,7 +13,6 @@ body {
 
     overflow: hidden;
     background: transparent;
-    /* background-image: url(./../public/bbg.jpg); */
     position: relative;
 }
 
@@ -33,13 +32,10 @@ h1 {
     display: none !important;
 }
 
-#webgazerVideoContainer {
-    /* display: none !important; */
-}
-
 .App {
     min-height: 100vh;
     height: 100vh;
+    overflow: auto;
 }
 
 @media (max-width: 1100px) {

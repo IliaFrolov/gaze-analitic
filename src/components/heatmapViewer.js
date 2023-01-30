@@ -1500,20 +1500,120 @@ const HeatmapViewer = ({ result = [], className, style, id = 'heatmapContainer',
             const dataPoint = result.map((e) => ({
                 x: e.x > 0 ? Math.round(e.x) : 0,
                 y: e.y > 0 ? Math.round(e.y) : 0,
-                value: 100,
+                value: 1,
             }));
             const data = {
-                max: 200,
+                max: 2,
                 min: 0,
                 data: dataPoint,
             };
-            // console.log('data', data);
+            console.log('HeatmapViewerData', data);
             heatmapInstance.setData(data);
+        }
+    });
+    useEffect(() => {
+        const canvas = document.getElementById('gazePlot');
+        canvas.width = document.body.clientWidth; //document.width is obsolete
+        canvas.height = document.body.clientHeight; //document.height is obsolete
+        // canvasW = canvas.width;
+        // canvasH = canvas.height;
+        let tempGroup = [];
+        const gazePlotData = result.reduce(
+            (result, values, inx, arr) => {
+                const x = Math.round(values.x);
+                const y = Math.round(values.y);
+                const saccadStep = 100;
+                const dist = ({ x, y }, inx, arr) =>
+                    inx > 0
+                        ? Math.round(
+                              Math.sqrt((x - arr[inx - 1].x) ** 2 + (y - arr[inx - 1].y) ** 2),
+                          )
+                        : 0;
+                const distance = dist({ x, y }, inx, arr);
+                if (distance <= saccadStep && inx > 0) {
+                    tempGroup.push({ x, y });
+                }
+                if (distance > saccadStep && inx > 0) {
+                    if (tempGroup.length) {
+                        result.pop();
+                        const lastRes = result[result.length - 1];
+                        const groupMediana = [lastRes, ...tempGroup].reduce(
+                            (res, val, groupIdx, groupArr) => {
+                                const middleX = Math.round((res.x + val.x) / 2);
+                                const middleY = Math.round((res.y + val.y) / 2);
+                                const middlePoint = {
+                                    x: middleX,
+                                    y: middleY,
+                                    size: groupArr.length * 0.5 || 1,
+                                    points: groupArr.length,
+                                    dist: dist({ x: middleX, y: middleY }, inx, arr),
+                                    arr: groupArr,
+                                };
+                                return middlePoint;
+                            },
+                            { x: 0, y: 0, dist: 0, size: 1, points: 1 },
+                        );
+                        result.push(groupMediana);
+                        tempGroup = [];
+                    }
+                    result.push({
+                        x,
+                        y,
+                        size: 1,
+                        dist: distance,
+                        points: 1,
+                    });
+                }
+                return result;
+            },
+            [{ x: 0, y: 0, dist: 0, size: 1, points: 1 }],
+        );
+        console.log({ gazePlotData });
+        const fixPoits = gazePlotData.filter(({ points }) => points > 1);
+        const fixPointsAmount = fixPoits.length;
+        const fixPointsMedSize =
+            fixPoits.reduce((res, val) => res + val.points, 0) / fixPointsAmount;
+        const sakkadeMedLenght = fixPoits.reduce((res, val) => res + val.dist, 0) / fixPointsAmount;
+        console.log('ficsation point amount', fixPointsAmount);
+        console.log('aproximate amount focus point in ficsation point', fixPointsMedSize);
+        console.log('aproximate sakkade lenght', sakkadeMedLenght);
+        console.log('k=sakkadeMedLenght/allPointsAmount', sakkadeMedLenght / gazePlotData.length);
+
+        if (canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            // ctx.globalAlpha = 1;
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            // all points are given as x (from left to right), y (from top to bottom)
+            ctx.font = '40px serif';
+            ctx.fillStyle = '#c82124';
+            gazePlotData.forEach(({ x, y, size }, inx, arr) => {
+                if (inx === 0) {
+                    ctx.moveTo(x, y);
+                    ctx.fillText('start', x, y);
+                }
+
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.arc(x, y, 10 * size, 0, Math.PI * 2, true);
+                // ctx.closePath();
+                // ctx.fill();
+                // ctx.fillText(size, x, y);
+                if (inx === arr.length - 1) {
+                    ctx.fillText('end', x, y);
+                }
+            });
         }
     });
 
     return (
         <div style={{ width: '100%', height: '100%', ...style }} className={className}>
+            <canvas
+                style={{ aspectRatio: 'auto', position: 'absolute', zIndex: 1 }}
+                id="gazePlot"
+            ></canvas>
             <div style={{ width: '100%', height: '100%' }} id={id || 'heatmapContainer'}></div>
         </div>
     );

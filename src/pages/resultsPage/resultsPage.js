@@ -88,6 +88,7 @@ const ResultsPage = () => {
                                         width: result[currentResultId].screenSize.width,
                                         height: result[currentResultId].screenSize.height,
                                         position: 'absolute',
+                                        padding: '0',
                                     }}
                                 >
                                     <div className={s.testetUi}>
